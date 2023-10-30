@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "pg": "^8.11.3"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "name": "food-recipe-api",
+  "version": "1.0.0",
+  "description": "api for food recipe app",
+  "main": "server.js",
+  "author": "rikimuhammad",
+  "license": "ISC"
+}
