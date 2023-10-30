@@ -25,7 +25,7 @@ const recipesController = {
     let result = data.rows[0];
 
     if (!result) {
-      res.status(404).json({
+      return res.status(404).json({
         code: 404,
         message: 'Failed get data!',
       });
@@ -38,20 +38,20 @@ const recipesController = {
   },
 
   inputRecipe: async (req, res) => {
-    let { photo, title, ingredients, id_user } = req.body;
+    let { photo, title, ingredients, id_user, id_category } = req.body;
 
-    if (!photo || !title || !ingredients || !id_user) {
+    if (!photo || !title || !ingredients || !id_user || !id_category) {
       return res.status(400).json({
         code: 400,
-        message: 'photo, title, ingredients, and id user is required',
+        message: 'photo, title, ingredients, id user and id category is required',
       });
     }
 
-    let data = { photo, title, ingredients, id_user };
+    let data = { photo, title, ingredients, id_user, id_category };
     let result = await createRecipe(data);
 
     if (!result) {
-      res.status(404).json({
+      return res.status(404).json({
         code: 404,
         message: 'Failed input data!',
       });
@@ -66,7 +66,7 @@ const recipesController = {
 
   putRecipe: async (req, res) => {
     let id_recipe = req.params.id;
-    let { photo, title, ingredients, id_user } = req.body;
+    let { photo, title, ingredients, id_user, id_category } = req.body;
 
     let recipe_data = await getRecipeById(id_recipe);
 
@@ -85,11 +85,12 @@ const recipesController = {
       title: title || data.title,
       ingredients: ingredients || data.ingredients,
       id_user: id_user || data.id_user,
+      id_category: id_category || data.id_category,
     };
     let result = await updateRecipe(newData);
 
     if (!result) {
-      res.status(404).json({
+      return res.status(404).json({
         code: 404,
         message: 'Failed update data!',
       });
@@ -109,7 +110,7 @@ const recipesController = {
     let result = data.rows[0];
 
     if (!result) {
-      res.status(404).json({
+      return res.status(404).json({
         code: 404,
         message: 'Failed data not found!',
       });

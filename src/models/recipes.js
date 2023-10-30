@@ -25,22 +25,25 @@ const getRecipeById = async (id_recipe) => {
 };
 
 const createRecipe = async (data) => {
-  const { photo, title, ingredients, id_user } = data;
+  const { photo, title, ingredients, id_user, id_category } = data;
   return new Promise((resolve, reject) => {
-    Pool.query(`INSERT INTO recipes (photo, title, ingredients, created_time, updated_time, id_user) VALUES ('${photo}', '${title}', '${ingredients}', current_timestamp, current_timestamp, ${id_user})`, (err, result) => {
-      if (!err) {
-        return resolve(result);
-      } else {
-        return reject(err);
+    Pool.query(
+      `INSERT INTO recipes (photo, title, ingredients, created_time, updated_time, id_user, id_category) VALUES ('${photo}', '${title}', '${ingredients}', current_timestamp, current_timestamp, ${id_user}, ${id_category})`,
+      (err, result) => {
+        if (!err) {
+          return resolve(result);
+        } else {
+          return reject(err);
+        }
       }
-    });
+    );
   });
 };
 
 const updateRecipe = async (data) => {
-  const { id_recipe, photo, title, ingredients } = data;
+  const { id_recipe, photo, title, ingredients, id_category } = data;
   return new Promise((resolve, reject) => {
-    Pool.query(`UPDATE recipes SET photo='${photo}', title='${title}', ingredients='${ingredients}', updated_time=current_timestamp WHERE id_recipe=${id_recipe}`, (err, result) => {
+    Pool.query(`UPDATE recipes SET photo='${photo}', title='${title}', ingredients='${ingredients}', updated_time=current_timestamp, id_category=${id_category} WHERE id_recipe=${id_recipe}`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
