@@ -1,11 +1,22 @@
-const { getAllRecipes, getRecipeById, createRecipe, updateRecipe, deleteRecipeById } = require('../models/recipes');
+const { getAllRecipes, getRecipeById, createRecipe, updateRecipe, deleteRecipeById, countAll } = require('../models/recipes');
+const createPagination = require('../utils/createPagination');
 
 const recipesController = {
   allRecipes: async (req, res, next) => {
-    let recipes = await getAllRecipes();
-    let data = recipes.rows;
+    // Pagination
+    let page = parseInt(req.query.page) || 0;
+    let limit = parseInt(req.query.limit) || 10;
+    let search = req.query.search || '';
+    let sort = req.query.sort;
+    let count = await countAll(search);
+    let paging = createPagination(count.rows[0].count, page, limit);
 
-    if (!data) {
+    let recipes = await getAllRecipes(paging, search, sort);
+    // let data = recipes.rows;
+
+    // console.log(recipes);
+
+    if (recipes.rows == 0) {
       return res.status(404).json({
         code: 400,
         message: 'Failed get data!',
@@ -14,7 +25,8 @@ const recipesController = {
     res.status(200).json({
       code: 200,
       message: 'Success get data!',
-      data,
+      data: recipes.rows,
+      pagination: paging.response,
     });
   },
 

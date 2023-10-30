@@ -1,8 +1,18 @@
 const Pool = require('../config/db');
 
-const getAllRecipes = async () => {
+const getAllRecipes = async (paging, search, sort = 'created_time') => {
   return new Promise((resolve, reject) => {
-    Pool.query(`SELECT * FROM recipes`, (err, result) => {
+    let query = `SELECT * FROM recipes WHERE LOWER(title) LIKE'%${search}%'`;
+
+    if (sort.trim() === 'title') {
+      query += ` ORDER BY title`;
+    } else {
+      query += ` ORDER BY ${sort} DESC`;
+    }
+
+    query += ` LIMIT ${paging.limit} OFFSET ${paging.offset}`;
+
+    Pool.query(query, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
@@ -65,10 +75,23 @@ const deleteRecipeById = async (id_recipe) => {
   });
 };
 
+const countAll = async (search) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT COUNT(*) FROM recipes WHERE LOWER(title) LIKE'%${search}%'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
 module.exports = {
   getAllRecipes,
   getRecipeById,
   createRecipe,
   updateRecipe,
   deleteRecipeById,
+  countAll,
 };
