@@ -2,7 +2,7 @@ const Pool = require('../config/db');
 
 const getAllCategory = async () => {
   return new Promise((resolve, reject) => {
-    Pool.query(`SELECT * FROM category`, (err, result) => {
+    Pool.query(`SELECT * FROM category ORDER BY id_category`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {

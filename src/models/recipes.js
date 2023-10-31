@@ -75,9 +75,33 @@ const deleteRecipeById = async (id_recipe) => {
   });
 };
 
+const getRecipeByIdUser = (id_user, paging, sort = 'created_time') => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT * FROM recipes WHERE id_user=${id_user} ORDER BY ${sort} DESC LIMIT ${paging.limit} OFFSET ${paging.offset}`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
 const countAll = async (search) => {
   return new Promise((resolve, reject) => {
     Pool.query(`SELECT COUNT(*) FROM recipes WHERE LOWER(title) LIKE'%${search}%'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
+const countMyRecipe = async (id_user) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT COUNT(*) FROM recipes WHERE id_user=${id_user}`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
@@ -94,4 +118,6 @@ module.exports = {
   updateRecipe,
   deleteRecipeById,
   countAll,
+  getRecipeByIdUser,
+  countMyRecipe,
 };

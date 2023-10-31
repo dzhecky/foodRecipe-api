@@ -1,8 +1,8 @@
-const { getAllRecipes, getRecipeById, createRecipe, updateRecipe, deleteRecipeById, countAll } = require('../models/recipes');
+const { getAllRecipes, getRecipeById, createRecipe, updateRecipe, deleteRecipeById, countAll, getRecipeByIdUser, countMyRecipe } = require('../models/recipes');
 const createPagination = require('../utils/createPagination');
 
 const recipesController = {
-  allRecipes: async (req, res, next) => {
+  allRecipes: async (req, res) => {
     // Pagination
     let page = parseInt(req.query.page) || 0;
     let limit = parseInt(req.query.limit) || 10;
@@ -12,9 +12,6 @@ const recipesController = {
     let paging = createPagination(count.rows[0].count, page, limit);
 
     let recipes = await getAllRecipes(paging, search, sort);
-    // let data = recipes.rows;
-
-    // console.log(recipes);
 
     if (recipes.rows == 0) {
       return res.status(404).json({
@@ -50,7 +47,8 @@ const recipesController = {
   },
 
   inputRecipe: async (req, res) => {
-    let { photo, title, ingredients, id_user, id_category } = req.body;
+    let { photo, title, ingredients, id_category } = req.body;
+    let id_user = req.user.id_user;
 
     if (!photo || !title || !ingredients || !id_user || !id_category) {
       return res.status(400).json({
@@ -78,7 +76,8 @@ const recipesController = {
 
   putRecipe: async (req, res) => {
     let id_recipe = req.params.id;
-    let { photo, title, ingredients, id_user, id_category } = req.body;
+    let id_user = req.user.id_user;
+    let { photo, title, ingredients, id_category } = req.body;
 
     let recipe_data = await getRecipeById(id_recipe);
 
@@ -131,6 +130,31 @@ const recipesController = {
     res.status(200).json({
       code: 200,
       message: 'Success delete data!',
+    });
+  },
+
+  myRecipes: async (req, res) => {
+    let id_user = req.user.id_user;
+    let page = parseInt(req.query.page) || 0;
+    let limit = parseInt(req.query.limit) || 10;
+    let sort = req.query.sort;
+    let count = await countMyRecipe(id_user);
+    let paging = createPagination(count.rows[0].count, page, limit);
+
+    let data = await getRecipeByIdUser(id_user, paging, sort);
+    let result = count.rows[0];
+
+    if (!result) {
+      return res.status(404).json({
+        code: 404,
+        message: 'Failed, data not found!',
+      });
+    }
+    res.status(200).json({
+      code: 200,
+      message: 'Success get data!',
+      result: data.rows,
+      pagination: paging.response,
     });
   },
 };
