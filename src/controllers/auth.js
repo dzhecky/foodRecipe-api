@@ -55,7 +55,7 @@ const authController = {
     let checkEmail = await getUserByEmail(email);
     if (checkEmail.rows.length === 0) {
       return res.status(400).json({
-        status: false,
+        code: 400,
         message: 'Email not registered',
       });
     }

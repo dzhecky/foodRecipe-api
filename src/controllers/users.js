@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
 const { showAllUsers, countAll, showUserById, deleteUserById, updateUserById } = require('../models/users');
 const createPagination = require('../utils/createPagination');
 
 const usersController = {
   getAllUsers: async (req, res) => {
+    // pagination
     let page = parseInt(req.query.page) || 0;
     let limit = parseInt(req.query.limit) || 10;
     let search = req.query.search || '';
@@ -38,7 +38,7 @@ const usersController = {
     if (!result) {
       return res.status(404).json({
         code: 404,
-        message: 'Data not found!',
+        message: 'Failed, data not found!',
       });
     }
     res.status(200).json({
@@ -48,88 +48,11 @@ const usersController = {
     });
   },
 
-  // register: async (req, res) => {
-  //   let { name, email, password, phone_number, photo } = req.body;
-
-  //   if (!name || !email || !password || !phone_number || !photo) {
-  //     return res.status(400).json({
-  //       code: 400,
-  //       message: 'name, email, password, phone_number and photo is required!',
-  //     });
-  //   }
-
-  //   let checkEmail = await checkEmailRegistered(email);
-  //   let checkEmailResult = checkEmail.rows[0].count;
-
-  //   if (checkEmailResult > 0) {
-  //     return res.status(400).json({
-  //       code: 400,
-  //       message: 'Email has been registered!',
-  //     });
-  //   }
-
-  //   //   hash password
-  //   let passwordHashed = await bcrypt.hash(password, 10);
-  //   let data = { name, email, passwordHashed, phone_number, photo };
-  //   await createUser(data);
-
-  //   if (!data) {
-  //     return res.status(404).json({
-  //       code: 404,
-  //       message: 'Register Failed!',
-  //     });
-  //   }
-
-  //   res.status(200).json({
-  //     code: 200,
-  //     message: 'Register success!',
-  //   });
-  // },
-
-  // login: async (req, res) => {
-  //   let { email, password } = req.body;
-
-  //   if (!email || !password) {
-  //     return res.status(400).json({
-  //       code: 400,
-  //       message: 'email and password is required!',
-  //     });
-  //   }
-
-  //   //   Check email is registered?
-  //   let checkEmail = await getUserByEmail(email);
-  //   if (checkEmail.rows.length === 0) {
-  //     return res.status(400).json({
-  //       status: false,
-  //       message: 'Email not registered',
-  //     });
-  //   }
-
-  //   //   Check password is match?
-  //   let isMatch = bcrypt.compareSync(password, checkEmail.rows[0].password);
-  //   if (!isMatch) {
-  //     return res.status(400).json({
-  //       code: 400,
-  //       message: 'Incorrect password, please enter the correct password',
-  //     });
-  //   }
-
-  //   // Generate token
-  //   const token = jwt.sign(checkEmail.rows[0], process.env.JWT_SECRET);
-  //   res.status(200).json({
-  //     code: 200,
-  //     message: 'Login success!',
-  //     token,
-  //   });
-  // },
-
   deleteUser: async (req, res) => {
     let id_user = req.params.id;
 
     let data = await showUserById(id_user);
     let result = data.rows[0];
-
-    console.log(result);
 
     if (!result) {
       return res.status(404).json({
@@ -146,11 +69,12 @@ const usersController = {
   },
 
   updateUser: async (req, res) => {
-    let id_user = req.user.id_user;
+    let id_user = req.params.id;
     let { name, email, password, phone_number, photo } = req.body;
 
     //   Check user
     let user = await showUserById(id_user);
+    console.log(user);
 
     if (user.rowCount == 0) {
       return res.status(404).json({
@@ -159,6 +83,7 @@ const usersController = {
       });
     }
 
+    // hashing password with bcrypt
     let data = user.rows[0];
     password = password || data.password;
     let passwordHashed = await bcrypt.hash(password, 10);
