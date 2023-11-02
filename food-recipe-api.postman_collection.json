@@ -1,0 +1,637 @@
+{
+	"info": {
+		"_postman_id": "68dddd89-b28f-4b6a-acf6-ee21a7a410ff",
+		"name": "food-recipe-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30796012"
+	},
+	"item": [
+		{
+			"name": "recipes",
+			"item": [
+				{
+					"name": "recipes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Key",
+									"value": "Value",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Key",
+									"value": "Value",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/recipe?search=nasi&page=1&limit=10&sort=category",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recipe"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "nasi",
+									"description": "serch by title"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "number, defalut: 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "number, default: 10"
+								},
+								{
+									"key": "sort",
+									"value": "category",
+									"description": "title | updated_time | category | default: updated_time"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my recipes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/recipe/show/myrecipes/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recipe",
+								"show",
+								"myrecipes",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "nasi",
+									"description": "serch by title",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "number, defalut: 1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "number, default: 10",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "category",
+									"description": "title | updated_time | category | default: updated_time",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail recipes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Key",
+									"value": "Value",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Key",
+									"value": "Value",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/recipe/detail/46",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recipe",
+								"detail",
+								"46"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "created_time",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recipe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "photo",
+									"value": "https://source.unsplash.com/random?food",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Nasi Goreng",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "ingredients",
+									"value": "Nasi,Garam,Kecap,Bawang merah dan bawang putih,telur dan daging ayam,cabai ",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "id_category",
+									"value": "1",
+									"description": "Main Course = 1 | Dessert = 2 | Appetizer = 5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/recipe",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recipe",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "photo",
+									"value": "https://source.unsplash.com/random?food",
+									"description": "required",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Dodol Garut",
+									"description": "required",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ingredients",
+									"value": "Tepung Ketan,Gula Merah,Santan Kelapa",
+									"description": "required",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "id_category",
+									"value": "1",
+									"description": "Main Course = 1 | Dessert = 2 | Appetizer = 5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/recipe/45",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recipe",
+								"45"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recipes by id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/recipe/47",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recipe",
+								"47"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "category",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/category",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/category/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/users?sort=created_time",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "created_time"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/13",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/18",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "riki muhmmad",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "rikimuhammad@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "087654321454",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "https://source.unsplash.com/random?users",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/users/13",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "user4@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "user4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "user4",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "user4@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "user4",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "081122334455",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "https://source.unsplash.com/random?users",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
