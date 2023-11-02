@@ -74,7 +74,7 @@ const recipesController = {
     if (!photo || !title || !ingredients || !id_user || !id_category) {
       return res.status(400).json({
         code: 400,
-        message: 'photo, title, ingredients, id user and id category is required',
+        message: 'photo, title, ingredients, and id category is required',
       });
     }
 

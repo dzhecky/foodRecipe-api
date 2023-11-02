@@ -72,6 +72,13 @@ const usersController = {
     let id_user = req.params.id;
     let { name, email, password, phone_number, photo } = req.body;
 
+    if (!password) {
+      return res.status(400).json({
+        code: 400,
+        message: 'password is required!',
+      });
+    }
+
     //   Check user
     let user = await showUserById(id_user);
     console.log(user);
