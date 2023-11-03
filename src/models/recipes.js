@@ -1,8 +1,14 @@
 const Pool = require('../config/db');
 
-const selectAllRecipes = async (paging, search, sort = 'updated_time') => {
+const selectAllRecipes = async (paging, search, searchBy = 'title', sort = 'updated_time') => {
   return new Promise((resolve, reject) => {
-    let query = `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.name AS author, category.name AS category FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category WHERE LOWER(title) LIKE'%${search}%'`;
+    let query = `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.name AS author, category.name AS category FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category WHERE`;
+
+    if (searchBy.trim() === 'ingredients') {
+      query += ` LOWER(ingredients) LIKE'%${search}%'`;
+    } else {
+      query += ` LOWER(${searchBy}) LIKE'%${search}%'`;
+    }
 
     if (sort.trim() === 'title') {
       query += ` ORDER BY title`;
@@ -112,9 +118,17 @@ const getRecipeByIdUser = (id_user, paging, search, sort = 'updated_time') => {
   });
 };
 
-const countAll = async (search) => {
+const countAll = async (search, searchBy = 'title') => {
   return new Promise((resolve, reject) => {
-    Pool.query(`SELECT COUNT(*) FROM recipes WHERE LOWER(title) LIKE'%${search}%'`, (err, result) => {
+    let query = `SELECT COUNT(*) FROM recipes WHERE`;
+
+    if (searchBy.trim() === 'ingredients') {
+      query += ` LOWER(ingredients) LIKE'%${search}%'`;
+    } else {
+      query += ` LOWER(${searchBy}) LIKE'%${search}%'`;
+    }
+
+    Pool.query(query, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {

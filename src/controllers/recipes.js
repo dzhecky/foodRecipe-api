@@ -8,22 +8,30 @@ const recipesController = {
     let page = parseInt(req.query.page) || 0;
     let limit = parseInt(req.query.limit) || 10;
     let search = req.query.search || '';
+    let searchBy = req.query.search_by;
     let sort = req.query.sort;
-    let count = await countAll(search);
-    let paging = createPagination(count.rows[0].count, page, limit);
+
+    // check serach by
+    let listSearch = ['title', 'ingredients', undefined];
+    if (!listSearch.includes(searchBy)) {
+      return res.status(404).json({ messsage: 'Search invalid' });
+    }
 
     // check sort
-    let lisSort = ['title', 'updated_time', 'category', undefined];
-    if (!lisSort.includes(sort)) {
+    let listSort = ['title', 'updated_time', 'category', undefined];
+    if (!listSort.includes(sort)) {
       return res.status(404).json({ messsage: 'Sort invalid' });
     }
 
-    let recipes = await selectAllRecipes(paging, search, sort);
+    let count = await countAll(search, searchBy);
+    let paging = createPagination(count.rows[0].count, page, limit);
+
+    let recipes = await selectAllRecipes(paging, search, searchBy, sort);
     let data = recipes.rows;
 
     if (data.length == 0) {
       return res.status(404).json({
-        code: 400,
+        code: 404,
         message: 'Failed, data not found!',
       });
     }
