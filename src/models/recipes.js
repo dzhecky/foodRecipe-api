@@ -37,6 +37,18 @@ const selectRecipeById = async (id_recipe) => {
   });
 };
 
+const getIdOwnerRecipe = async (id_recipe) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT * FROM recipes WHERE id_recipe=${id_recipe}`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
 const inputRecipe = async (data) => {
   const { photo, title, ingredients, id_user, id_category } = data;
   return new Promise((resolve, reject) => {
@@ -133,4 +145,5 @@ module.exports = {
   countAll,
   getRecipeByIdUser,
   countMyRecipe,
+  getIdOwnerRecipe,
 };

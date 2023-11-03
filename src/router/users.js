@@ -1,12 +1,16 @@
 const express = require('express');
 const { getAllUsers, getUsersById, deleteUser, updateUser } = require('../controllers/users');
 const verifyToken = require('../middleware/auth');
+const { mySelf } = require('../middleware/roleUsers');
 
 const router = express.Router();
 
+// All role
 router.get('/', verifyToken, getAllUsers);
 router.get('/:id', verifyToken, getUsersById);
-router.put('/:id', verifyToken, updateUser);
-router.delete('/:id', verifyToken, deleteUser);
+
+// Only owner
+router.put('/:id', verifyToken, mySelf, updateUser);
+router.delete('/:id', verifyToken, mySelf, deleteUser);
 
 module.exports = router;

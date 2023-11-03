@@ -33,7 +33,7 @@ const showAllUsers = async (paging, search, sort = 'name') => {
 
 const showUserById = async (id_user) => {
   return new Promise((resolve, reject) => {
-    Pool.query(`SELECT id_user, name, email, phone_number, photo, created_time FROM users WHERE id_user=${id_user}`, (err, result) => {
+    Pool.query(`SELECT id_user, name, email, phone_number, photo, created_time, level FROM users WHERE id_user=${id_user}`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {

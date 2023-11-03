@@ -17,7 +17,7 @@ const usersController = {
     if (users.rows == 0) {
       return res.status(404).json({
         code: 404,
-        message: 'Failed get data!',
+        message: 'Failed get data, data not found!',
       });
     }
 
