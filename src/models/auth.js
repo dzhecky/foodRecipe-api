@@ -28,16 +28,4 @@ const checkEmailRegistered = async (email) => {
   });
 };
 
-const getUserByEmail = async (email) => {
-  return new Promise((resolve, reject) => {
-    Pool.query(`SELECT * FROM users WHERE email='${email}'`, (err, result) => {
-      if (!err) {
-        return resolve(result);
-      } else {
-        return reject(err);
-      }
-    });
-  });
-};
-
-module.exports = { createUser, checkEmailRegistered, getUserByEmail };
+module.exports = { createUser, checkEmailRegistered };

@@ -68,10 +68,23 @@ const updateUserById = async (data) => {
   });
 };
 
+const getUserByEmail = async (email) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT * FROM users WHERE email='${email}'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
 module.exports = {
   showAllUsers,
   countAll,
   showUserById,
   deleteUserById,
   updateUserById,
+  getUserByEmail,
 };

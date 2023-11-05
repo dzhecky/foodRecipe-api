@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { createUser, checkEmailRegistered, getUserByEmail } = require('../models/auth');
+const { createUser, checkEmailRegistered } = require('../models/auth');
+const { getUserByEmail } = require('../models/users');
 
 const authController = {
   register: async (req, res) => {
@@ -70,12 +71,45 @@ const authController = {
     }
 
     // Generate token
-    const token = jwt.sign(checkEmail.rows[0], process.env.JWT_SECRET);
+    const accessToken = jwt.sign(checkEmail.rows[0], process.env.JWT_SECRET, { expiresIn: '1d' });
+    const refreshToken = jwt.sign(checkEmail.rows[0], process.env.JWT_REFRESH_SECRET, { expiresIn: '1Y' });
     res.status(200).json({
       code: 200,
       message: 'Login success!',
-      token,
+      token: {
+        accessToken,
+        refreshToken,
+      },
     });
+  },
+
+  refreshToken: async (req, res) => {
+    let value = req.body;
+
+    try {
+      let decoded = jwt.verify(value.refreshToken, process.env.JWT_REFRESH_SECRET);
+      let user = await getUserByEmail(decoded.email);
+
+      if (!user) {
+        res.status(404).json({
+          code: 404,
+          message: 'User not found!',
+        });
+      }
+
+      let accessToken = jwt.sign(user.rows[0], process.env.JWT_SECRET, { expiresIn: '1d' });
+
+      res.status(200).json({
+        code: 200,
+        message: 'Access token updated!',
+        token: { accessToken },
+      });
+    } catch (error) {
+      res.status(401).json({
+        code: 401,
+        message: error.message,
+      });
+    }
   },
 };
 
