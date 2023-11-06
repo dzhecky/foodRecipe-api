@@ -27,6 +27,8 @@ npm run start
 7. xss-clean
 8. jsonwebtoken
 9. morgan
+10. uuid
+11. nodemailer
 
 ## Dev Tools
 

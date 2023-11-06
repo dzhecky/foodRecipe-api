@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
-const { createUser, checkEmailRegistered } = require('../models/auth');
+const { createUser, checkEmailRegistered, checkUserIsActive, activateUser } = require('../models/auth');
 const { getUserByEmail } = require('../models/users');
+const { sendMail } = require('../utils/sendMail');
 
 const authController = {
   register: async (req, res) => {
@@ -37,9 +38,41 @@ const authController = {
       });
     }
 
+    // Activation Email
+    let user = await getUserByEmail(data.email);
+    let sendEmailToUser = await sendMail(user.rows[0].email, user.rows[0].uuid);
+
+    if (!sendEmailToUser) {
+      await createUser.rollback();
+      return res.status(500).json({
+        code: 500,
+        error: 'Send email failed',
+        message: 'Register Failed',
+      });
+    }
+
     res.status(200).json({
       code: 200,
-      message: 'Register success!',
+      message: 'Register success, please check your email to activate!',
+    });
+  },
+
+  setActivateUser: async (req, res, next) => {
+    let id_user = req.params.id;
+    let checkUser = await checkUserIsActive(id_user);
+
+    if (!checkUser) {
+      return res.status(404).json({
+        code: 404,
+        message: 'User not found or user has been activated!',
+      });
+    }
+
+    await activateUser(checkUser.rows[0].uuid);
+
+    res.status(200).json({
+      code: 200,
+      message: 'User activated successfully',
     });
   },
 
@@ -68,6 +101,14 @@ const authController = {
       return res.status(400).json({
         code: 400,
         message: 'Incorrect password, please enter the correct password',
+      });
+    }
+
+    // Check email is activated?
+    if (checkEmail.rows[0].is_active === false) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Email not active, please check your email to activated',
       });
     }
 

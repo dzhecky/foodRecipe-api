@@ -3,9 +3,10 @@ const { getIdOwnerRecipe } = require('../models/recipes');
 module.exports = {
   onlyAdmin: (req, res, next) => {
     if (req.user.level === 1) {
+      // console.log('cek only admin lolos');
       return next();
     }
-    res.status(403).json({
+    return res.status(403).json({
       code: 403,
       message: 'Forbidden access',
       level: req.user.level,
@@ -14,9 +15,23 @@ module.exports = {
 
   onlyUsers: (req, res, next) => {
     if (req.user.level === 2) {
+      // console.log('cek only users lolos');
       return next();
     }
-    res.status(403).json({
+    // console.log('cek only users tidak lolos');
+    return res.status(403).json({
+      code: 403,
+      message: 'Forbidden access',
+    });
+  },
+
+  usersAndAdmin: (req, res, next) => {
+    if (req.user.level === 1 || req.user.level === 2) {
+      // console.log('cek only users lolos');
+      return next();
+    }
+    // console.log('cek only users tidak lolos');
+    return res.status(403).json({
       code: 403,
       message: 'Forbidden access',
     });
@@ -29,7 +44,7 @@ module.exports = {
     if (idUser == myId) {
       return next();
     }
-    res.status(403).json({
+    return res.status(403).json({
       code: 403,
       message: 'Forbidden access',
     });

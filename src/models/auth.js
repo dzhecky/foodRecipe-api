@@ -28,4 +28,28 @@ const checkEmailRegistered = async (email) => {
   });
 };
 
-module.exports = { createUser, checkEmailRegistered };
+const checkUserIsActive = async (uuid) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT * FROM users WHERE uuid='${uuid}' AND is_active=false`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
+const activateUser = async (uuid) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`UPDATE users SET is_active=true WHERE uuid='${uuid}'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
+module.exports = { createUser, checkEmailRegistered, checkUserIsActive, activateUser };
