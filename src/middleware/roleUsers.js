@@ -23,9 +23,10 @@ module.exports = {
   },
 
   mySelf: (req, res, next) => {
-    let idUser = req.user.id_user;
-    let myId = parseInt(req.params.id);
-    if (idUser === parseInt(myId)) {
+    let idUser = req.user.uuid;
+    let myId = req.params.id;
+
+    if (idUser == myId) {
       return next();
     }
     res.status(403).json({

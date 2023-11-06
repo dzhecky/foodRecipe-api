@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
 const { createUser, checkEmailRegistered } = require('../models/auth');
 const { getUserByEmail } = require('../models/users');
 
@@ -26,7 +27,7 @@ const authController = {
 
     //   hash password
     let passwordHashed = await bcrypt.hash(password, 10);
-    let data = { name, email, passwordHashed, phone_number, photo };
+    let data = { name, email, passwordHashed, phone_number, photo, uuid: uuidv4() };
     await createUser(data);
 
     if (!data) {

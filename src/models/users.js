@@ -14,7 +14,7 @@ const countAll = async (search) => {
 
 const showAllUsers = async (paging, search, sort = 'name') => {
   return new Promise((resolve, reject) => {
-    let query = `SELECT id_user, name, email, phone_number, photo, created_time FROM users WHERE LOWER(name) LIKE'%${search}%'`;
+    let query = `SELECT id_user, name, email, phone_number, photo, created_time, uuid FROM users WHERE LOWER(name) LIKE'%${search}%'`;
     if (sort === 'created_time') {
       query += ` ORDER BY created_time DESC`;
     } else {
@@ -31,9 +31,9 @@ const showAllUsers = async (paging, search, sort = 'name') => {
   });
 };
 
-const showUserById = async (id_user) => {
+const showUserById = async (uuid) => {
   return new Promise((resolve, reject) => {
-    Pool.query(`SELECT id_user, name, email, phone_number, photo, created_time, level FROM users WHERE id_user=${id_user}`, (err, result) => {
+    Pool.query(`SELECT id_user, uuid, name, email, phone_number, photo, created_time, level FROM users WHERE uuid='${uuid}'`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
@@ -43,9 +43,9 @@ const showUserById = async (id_user) => {
   });
 };
 
-const deleteUserById = async (id_user) => {
+const deleteUserById = async (uuid) => {
   return new Promise((resolve, reject) => {
-    Pool.query(`DELETE FROM users WHERE id_user=${id_user}`, (err, result) => {
+    Pool.query(`DELETE FROM users WHERE uuid='${uuid}'`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
@@ -56,9 +56,9 @@ const deleteUserById = async (id_user) => {
 };
 
 const updateUserById = async (data) => {
-  const { id_user, name, email, passwordHashed, phone_number, photo } = data;
+  const { id_user, name, email, passwordHashed, phone_number, photo, uuid } = data;
   return new Promise((resolve, reject) => {
-    Pool.query(`UPDATE users SET name='${name}', email='${email}', password='${passwordHashed}', phone_number='${phone_number}', photo='${photo}', updated_time=current_timestamp WHERE id_user=${id_user}`, (err, result) => {
+    Pool.query(`UPDATE users SET name='${name}', email='${email}', password='${passwordHashed}', phone_number='${phone_number}', photo='${photo}', updated_time=current_timestamp WHERE uuid='${uuid}'`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {

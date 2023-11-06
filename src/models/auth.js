@@ -1,10 +1,10 @@
 const Pool = require('../config/db');
 
 const createUser = async (data) => {
-  const { name, email, passwordHashed, phone_number, photo } = data;
+  const { name, email, passwordHashed, phone_number, photo, uuid } = data;
   return new Promise((resolve, reject) => {
     Pool.query(
-      `INSERT INTO users (name, email, password, phone_number, photo, created_time, updated_time) VALUES ('${name}', '${email}', '${passwordHashed}', '${phone_number}', '${photo}', current_timestamp, current_timestamp)`,
+      `INSERT INTO users (name, email, password, phone_number, photo, created_time, updated_time, uuid) VALUES ('${name}', '${email}', '${passwordHashed}', '${phone_number}', '${photo}', current_timestamp, current_timestamp, '${uuid}')`,
       (err, result) => {
         if (!err) {
           return resolve(result);

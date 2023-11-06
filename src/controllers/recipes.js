@@ -33,6 +33,7 @@ const recipesController = {
       return res.status(404).json({
         code: 404,
         message: 'Failed, data not found!',
+        data: [],
       });
     }
 
@@ -60,6 +61,7 @@ const recipesController = {
       return res.status(404).json({
         code: 404,
         message: 'Failed, data not found!',
+        data: [],
       });
     }
 
@@ -75,11 +77,54 @@ const recipesController = {
     });
   },
 
+  showRecipeByIdUser: async (req, res) => {
+    // pagination
+    let id_user = req.user.id_user;
+    let uuid = req.params.id;
+    let page = parseInt(req.query.page) || 0;
+    let limit = parseInt(req.query.limit) || 10;
+    let search = req.query.search || '';
+    let sort = req.query.sort;
+    let count = await countMyRecipe(uuid, search);
+    let paging = createPagination(count.rows[0].count, page, limit);
+
+    // check sort
+    let lisSort = ['title', 'updated_time', 'category', undefined];
+    if (!lisSort.includes(sort)) {
+      return res.status(404).json({ messsage: 'Sort invalid' });
+    }
+
+    let recipes = await getRecipeByIdUser(uuid, paging, search, sort);
+    let data = recipes.rows;
+
+    if (data.length == 0) {
+      return res.status(404).json({
+        code: 404,
+        message: 'Failed, data not found!',
+        data: [],
+      });
+    }
+
+    // change items ingredients with split
+    data.forEach((items, i) => {
+      let ingredients = items.ingredients.split(',');
+      data[i].ingredients = ingredients;
+    });
+
+    res.status(200).json({
+      code: 200,
+      message: `Success get recipes user: ${data[0].author}`,
+      data: data,
+      pagination: paging.response,
+    });
+  },
+
   postRecipe: async (req, res) => {
     let { photo, title, ingredients, id_category } = req.body;
     let id_user = req.user.id_user;
+    let uuid = req.user.uuid;
 
-    if (!photo || !title || !ingredients || !id_user || !id_category) {
+    if (!photo || !title || !ingredients || !id_user || !id_category || !uuid) {
       return res.status(400).json({
         code: 400,
         message: 'photo, title, ingredients, and id category is required',
@@ -97,7 +142,7 @@ const recipesController = {
       return res.status(404).json({ messsage: 'category invalid' });
     }
 
-    let data = { photo, title, ingredients, id_user, id_category };
+    let data = { photo, title, ingredients, id_user, id_category, uuid };
     let result = await inputRecipe(data);
 
     if (!result) {
@@ -117,6 +162,7 @@ const recipesController = {
   putRecipe: async (req, res) => {
     let id_recipe = req.params.id;
     let id_user = req.user.id_user;
+    let uuid = req.user.uuid;
     let { photo, title, ingredients, id_category } = req.body;
 
     let recipe_data = await selectRecipeById(id_recipe);
@@ -125,6 +171,7 @@ const recipesController = {
       return res.status(404).json({
         code: 404,
         message: 'Failed data not found!',
+        data: [],
       });
     }
 
@@ -148,6 +195,7 @@ const recipesController = {
       ingredients: ingredients || data.ingredients,
       id_user: id_user || data.id_user,
       id_category: id_category || data.id_category,
+      uuid: uuid || data.uuid,
     };
     let result = await updateRecipe(newData);
 
@@ -174,6 +222,7 @@ const recipesController = {
       return res.status(404).json({
         code: 404,
         message: 'Failed data not found!',
+        data: [],
       });
     }
 
@@ -187,11 +236,12 @@ const recipesController = {
   myRecipes: async (req, res) => {
     // pagination
     let id_user = req.user.id_user;
+    let uuid = req.user.uuid;
     let page = parseInt(req.query.page) || 0;
     let limit = parseInt(req.query.limit) || 10;
     let search = req.query.search || '';
     let sort = req.query.sort;
-    let count = await countMyRecipe(id_user, search);
+    let count = await countMyRecipe(uuid, search);
     let paging = createPagination(count.rows[0].count, page, limit);
 
     // check sort
@@ -200,13 +250,14 @@ const recipesController = {
       return res.status(404).json({ messsage: 'Sort invalid' });
     }
 
-    let recipes = await getRecipeByIdUser(id_user, paging, search, sort);
+    let recipes = await getRecipeByIdUser(uuid, paging, search, sort);
     let data = recipes.rows;
 
     if (data.length == 0) {
       return res.status(404).json({
         code: 404,
         message: 'Failed, data not found!',
+        data: [],
       });
     }
 

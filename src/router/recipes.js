@@ -1,12 +1,13 @@
 const express = require('express');
-const { allRecipes, getRecipeById, postRecipe, putRecipe, deleteRecipeId, myRecipes } = require('../controllers/recipes');
+const { allRecipes, getRecipeById, showRecipeByIdUser, postRecipe, putRecipe, deleteRecipeId, myRecipes } = require('../controllers/recipes');
 const verifyToken = require('../middleware/auth');
-const { onlyUsers, mySelf, recipeOwner } = require('../middleware/roleUsers');
+const { onlyUsers, recipeOwner } = require('../middleware/roleUsers');
 const router = express.Router();
 
 // All role
 router.get('/', verifyToken, allRecipes);
 router.get('/detail/:id', verifyToken, getRecipeById);
+router.get('/:id', verifyToken, showRecipeByIdUser);
 
 // Only users
 router.post('/', verifyToken, onlyUsers, postRecipe);

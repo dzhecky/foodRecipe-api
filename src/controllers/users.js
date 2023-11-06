@@ -39,6 +39,7 @@ const usersController = {
       return res.status(404).json({
         code: 404,
         message: 'Failed, data not found!',
+        data: [],
       });
     }
     res.status(200).json({
@@ -79,6 +80,7 @@ const usersController = {
       });
     }
 
+    console.log(id_user);
     //   Check user
     let user = await showUserById(id_user);
     console.log(user);
@@ -87,6 +89,7 @@ const usersController = {
       return res.status(404).json({
         code: 404,
         message: 'Failed, data not found!',
+        data: [],
       });
     }
 
@@ -102,6 +105,7 @@ const usersController = {
       passwordHashed,
       phone_number: phone_number || data.phone_number,
       photo: photo || data.photo,
+      uuid: data.uuid,
     };
 
     let result = await updateUserById(newData);
