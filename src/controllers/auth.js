@@ -4,15 +4,24 @@ const { v4: uuidv4 } = require('uuid');
 const { createUser, checkEmailRegistered, checkUserIsActive, activateUser } = require('../models/auth');
 const { getUserByEmail } = require('../models/users');
 const { sendMail } = require('../utils/sendMail');
+const cloudinary = require('../config/photo');
 
 const authController = {
   register: async (req, res) => {
-    let { name, email, password, phone_number, photo } = req.body;
+    let { name, email, password, phone_number } = req.body;
 
-    if (!name || !email || !password || !phone_number || !photo) {
+    if (!req.file) {
+      return res.status(400).json({ messsage: 'photo is required and must be image file' });
+    }
+
+    if (!req.isFileValid) {
+      return res.status(400).json({ messsage: isFileValidMessage });
+    }
+
+    if (!name || !email || !password || !phone_number) {
       return res.status(400).json({
         code: 400,
-        message: 'name, email, password, phone_number and photo is required!',
+        message: 'name, email, password, phone_number and is required!',
       });
     }
 
@@ -26,9 +35,17 @@ const authController = {
       });
     }
 
+    const imageUpload = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'users_recipes',
+    });
+
+    if (!imageUpload) {
+      return res.status(400).json({ messsage: 'upload photo failed' });
+    }
+
     //   hash password
     let passwordHashed = await bcrypt.hash(password, 10);
-    let data = { name, email, passwordHashed, phone_number, photo, uuid: uuidv4() };
+    let data = { name, email, passwordHashed, phone_number, photo: imageUpload.secure_url, uuid: uuidv4() };
     await createUser(data);
 
     if (!data) {

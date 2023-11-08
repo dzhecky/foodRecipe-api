@@ -29,6 +29,8 @@ npm run start
 9. morgan
 10. uuid
 11. nodemailer
+12. multer
+13. cloudinary
 
 ## Dev Tools
 

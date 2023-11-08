@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
-const { showAllUsers, countAll, showUserById, deleteUserById, updateUserById } = require('../models/users');
+const { showAllUsers, countAll, showUserById, deleteUserById, updateUserById, selectMyAccount } = require('../models/users');
 const createPagination = require('../utils/createPagination');
+const cloudinary = require('../config/photo');
 
 const usersController = {
   getAllUsers: async (req, res) => {
@@ -71,19 +72,10 @@ const usersController = {
 
   updateUser: async (req, res) => {
     let id_user = req.params.id;
-    let { name, email, password, phone_number, photo } = req.body;
+    let { name, phone_number } = req.body;
 
-    if (!password) {
-      return res.status(400).json({
-        code: 400,
-        message: 'password is required!',
-      });
-    }
-
-    console.log(id_user);
     //   Check user
-    let user = await showUserById(id_user);
-    console.log(user);
+    let user = await selectMyAccount(id_user);
 
     if (user.rowCount == 0) {
       return res.status(404).json({
@@ -93,34 +85,85 @@ const usersController = {
       });
     }
 
-    // hashing password with bcrypt
     let data = user.rows[0];
-    password = password || data.password;
-    let passwordHashed = await bcrypt.hash(password, 10);
 
     let newData = {
       id_user: data.id_user,
       name: name || data.name,
-      email: email || data.email,
-      passwordHashed,
+      email: data.email,
       phone_number: phone_number || data.phone_number,
-      photo: photo || data.photo,
       uuid: data.uuid,
+      is_active: data.is_active,
     };
 
-    let result = await updateUserById(newData);
+    // if not update password
+    if (!req.body.password) {
+      newData.password = data.password;
+    }
 
-    if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed update data!',
+    // if not update password
+    if (req.body.password) {
+      // hashing password with bcrypt
+      let password = req.body.password;
+      if (!password) {
+        return res.status(400).json({
+          code: 400,
+          message: 'password is required',
+        });
+      }
+      let passwordHashed = await bcrypt.hash(password, 10);
+
+      newData.password = passwordHashed;
+    }
+
+    // check photo
+    if (!req.file) {
+      newData.photo = data.photo;
+      let result = await updateUserById(newData);
+
+      if (!result) {
+        return res.status(404).json({
+          code: 404,
+          message: 'Failed update data!',
+        });
+      }
+
+      res.status(200).json({
+        code: 200,
+        message: 'Success update data!',
       });
     }
 
-    res.status(200).json({
-      code: 200,
-      message: 'Success update data!',
-    });
+    if (req.file) {
+      if (!req.isFileValid) {
+        return res.status(404).json({
+          messsage: 'failed update data, photo must be image file',
+        });
+      }
+
+      const imageUpload = await cloudinary.uploader.upload(req.file.path, {
+        folder: 'recipes',
+      });
+
+      if (!imageUpload) {
+        return res.status(400).json({ messsage: 'upload photo failed' });
+      }
+      newData.photo = imageUpload.secure_url;
+
+      let result = await updateUserById(newData);
+
+      if (!result) {
+        return res.status(404).json({
+          code: 404,
+          message: 'Failed update data!',
+        });
+      }
+
+      res.status(200).json({
+        code: 200,
+        message: 'Success update data!',
+      });
+    }
   },
 };
 

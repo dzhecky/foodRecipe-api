@@ -3,6 +3,7 @@ const { getAllUsers, getUsersById, deleteUser, updateUser } = require('../contro
 const verifyToken = require('../middleware/auth');
 const { mySelf } = require('../middleware/roleUsers');
 const { isActivated } = require('../middleware/isActivated');
+const upload = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get('/', verifyToken, isActivated, getAllUsers);
 router.get('/:id', verifyToken, isActivated, getUsersById);
 
 // Only owner
-router.put('/:id', verifyToken, isActivated, mySelf, updateUser);
+router.put('/:id', verifyToken, isActivated, mySelf, upload.single('photo'), updateUser);
 router.delete('/:id', verifyToken, isActivated, mySelf, deleteUser);
 
 module.exports = router;

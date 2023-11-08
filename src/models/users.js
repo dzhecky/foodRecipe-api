@@ -43,6 +43,18 @@ const showUserById = async (uuid) => {
   });
 };
 
+const selectMyAccount = async (uuid) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT * FROM users WHERE uuid='${uuid}'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
 const deleteUserById = async (uuid) => {
   return new Promise((resolve, reject) => {
     Pool.query(`DELETE FROM users WHERE uuid='${uuid}'`, (err, result) => {
@@ -56,9 +68,9 @@ const deleteUserById = async (uuid) => {
 };
 
 const updateUserById = async (data) => {
-  const { id_user, name, email, passwordHashed, phone_number, photo, uuid } = data;
+  const { name, email, password, phone_number, photo, uuid } = data;
   return new Promise((resolve, reject) => {
-    Pool.query(`UPDATE users SET name='${name}', email='${email}', password='${passwordHashed}', phone_number='${phone_number}', photo='${photo}', updated_time=current_timestamp WHERE uuid='${uuid}'`, (err, result) => {
+    Pool.query(`UPDATE users SET name='${name}', email='${email}', password='${password}', phone_number='${phone_number}', photo='${photo}', updated_time=current_timestamp WHERE uuid='${uuid}'`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
@@ -87,4 +99,5 @@ module.exports = {
   deleteUserById,
   updateUserById,
   getUserByEmail,
+  selectMyAccount,
 };

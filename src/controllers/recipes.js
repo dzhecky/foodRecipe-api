@@ -1,3 +1,4 @@
+const cloudinary = require('../config/photo');
 const { getAllCategory } = require('../models/category');
 const { selectAllRecipes, selectRecipeById, inputRecipe, updateRecipe, deleteRecipeById, countAll, getRecipeByIdUser, countMyRecipe } = require('../models/recipes');
 const createPagination = require('../utils/createPagination');
@@ -120,15 +121,31 @@ const recipesController = {
   },
 
   postRecipe: async (req, res) => {
-    let { photo, title, ingredients, id_category } = req.body;
+    let { title, ingredients, id_category } = req.body;
     let id_user = req.user.id_user;
     let uuid = req.user.uuid;
 
-    if (!photo || !title || !ingredients || !id_user || !id_category || !uuid) {
+    if (!req.file) {
+      return res.status(400).json({ messsage: 'photo is required and must be image file' });
+    }
+
+    if (!req.isFileValid) {
+      return res.status(400).json({ messsage: isFileValidMessage });
+    }
+
+    if (!title || !ingredients || !id_user || !id_category || !uuid) {
       return res.status(400).json({
         code: 400,
-        message: 'photo, title, ingredients, and id category is required',
+        message: 'title, ingredients, and id category is required',
       });
+    }
+
+    const imageUpload = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'recipes',
+    });
+
+    if (!imageUpload) {
+      return res.status(400).json({ messsage: 'upload photo failed' });
     }
 
     // check category
@@ -142,7 +159,7 @@ const recipesController = {
       return res.status(404).json({ messsage: 'category invalid' });
     }
 
-    let data = { photo, title, ingredients, id_user, id_category, uuid };
+    let data = { photo: imageUpload.secure_url, title, ingredients, id_user, id_category, uuid };
     let result = await inputRecipe(data);
 
     if (!result) {
@@ -163,7 +180,7 @@ const recipesController = {
     let id_recipe = req.params.id;
     let id_user = req.user.id_user;
     let uuid = req.user.uuid;
-    let { photo, title, ingredients, id_category } = req.body;
+    let { title, ingredients, id_category } = req.body;
 
     let recipe_data = await selectRecipeById(id_recipe);
 
@@ -175,41 +192,81 @@ const recipesController = {
       });
     }
 
-    // check category
-    let category = await getAllCategory();
-    let is_category = false;
-    category.rows.forEach((items) => {
-      if (items.id_category == id_category) return (is_category = true);
-    });
-
-    if (!is_category) {
-      return res.status(404).json({ messsage: 'category invalid' });
-    }
-
     let data = recipe_data.rows[0];
+
+    // check category
+    if (!id_category) {
+      id_category = data.id_category;
+    } else if (isNaN(parseInt(id_category))) {
+      return res.status(404).json({ messsage: 'category invalid' });
+    } else {
+      let category = await getAllCategory();
+      let is_category = false;
+      category.rows.forEach((items) => {
+        if (items.id_category == id_category) return (is_category = true);
+      });
+      if (!is_category) {
+        return res.status(404).json({ messsage: 'category invalid' });
+      }
+    }
 
     let newData = {
       id_recipe: data.id_recipe,
-      photo: photo || data.photo,
       title: title || data.title,
       ingredients: ingredients || data.ingredients,
       id_user: id_user || data.id_user,
       id_category: id_category || data.id_category,
       uuid: uuid || data.uuid,
     };
-    let result = await updateRecipe(newData);
 
-    if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed update data!',
+    // check photo
+    if (!req.file) {
+      newData.photo = data.photo;
+      let result = await updateRecipe(newData);
+
+      if (!result) {
+        return res.status(404).json({
+          code: 404,
+          message: 'Failed update data!',
+        });
+      }
+
+      res.status(200).json({
+        code: 200,
+        message: 'Success update data!',
       });
     }
 
-    res.status(200).json({
-      code: 200,
-      message: 'Success update data!',
-    });
+    if (req.file) {
+      if (!req.isFileValid) {
+        return res.status(404).json({
+          messsage: 'failed update data, photo must be image file',
+        });
+      }
+
+      const imageUpload = await cloudinary.uploader.upload(req.file.path, {
+        folder: 'recipes',
+      });
+
+      if (!imageUpload) {
+        return res.status(400).json({ messsage: 'upload photo failed' });
+      }
+      newData.photo = imageUpload.secure_url;
+
+      let result = await updateRecipe(newData);
+
+      if (!result) {
+        return res.status(404).json({
+          code: 404,
+          message: 'Failed update data!',
+        });
+      }
+
+      res.status(200).json({
+        code: 200,
+        message: 'Success update data!',
+      });
+    }
   },
 
   deleteRecipeId: async (req, res) => {
