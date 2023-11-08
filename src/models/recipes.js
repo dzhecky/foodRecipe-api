@@ -58,16 +58,13 @@ const getIdOwnerRecipe = async (id_recipe) => {
 const inputRecipe = async (data) => {
   const { photo, title, ingredients, id_user, id_category, uuid } = data;
   return new Promise((resolve, reject) => {
-    Pool.query(
-      `INSERT INTO recipes (photo, title, ingredients, created_time, updated_time, id_user, id_category, uuid) VALUES ('${photo}', '${title}', '${ingredients}', current_timestamp, current_timestamp, ${id_user}, ${id_category}, '${uuid}')`,
-      (err, result) => {
-        if (!err) {
-          return resolve(result);
-        } else {
-          return reject(err);
-        }
+    Pool.query(`INSERT INTO recipes (photo, title, ingredients, id_user, id_category, uuid) VALUES ('${photo}', '${title}', '${ingredients}', ${id_user}, ${id_category}, '${uuid}')`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
       }
-    );
+    });
   });
 };
 

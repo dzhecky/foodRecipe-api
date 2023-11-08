@@ -1,9 +1,9 @@
 const { getIdOwnerRecipe } = require('../models/recipes');
+const { getIdOwnerEvent } = require('../models/event');
 
 module.exports = {
   onlyAdmin: (req, res, next) => {
     if (req.user.level === 1) {
-      // console.log('cek only admin lolos');
       return next();
     }
     return res.status(403).json({
@@ -15,10 +15,8 @@ module.exports = {
 
   onlyUsers: (req, res, next) => {
     if (req.user.level === 2) {
-      // console.log('cek only users lolos');
       return next();
     }
-    // console.log('cek only users tidak lolos');
     return res.status(403).json({
       code: 403,
       message: 'Forbidden access',
@@ -27,10 +25,8 @@ module.exports = {
 
   usersAndAdmin: (req, res, next) => {
     if (req.user.level === 1 || req.user.level === 2) {
-      // console.log('cek only users lolos');
       return next();
     }
-    // console.log('cek only users tidak lolos');
     return res.status(403).json({
       code: 403,
       message: 'Forbidden access',
@@ -59,6 +55,25 @@ module.exports = {
       next();
     } else {
       if (idUser === recipe.rows[0].id_user) {
+        next();
+      } else {
+        res.status(403).json({
+          code: 403,
+          message: 'Forbidden access',
+        });
+      }
+    }
+  },
+
+  eventOwner: async (req, res, next) => {
+    let idUser = req.user.uuid;
+    let idRecipe = req.params.id;
+    let event = await getIdOwnerEvent(idRecipe);
+
+    if (!event.rowCount) {
+      next();
+    } else {
+      if (idUser === event.rows[0].users_id) {
         next();
       } else {
         res.status(403).json({
