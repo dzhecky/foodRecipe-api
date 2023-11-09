@@ -19,7 +19,66 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo2MywibmFtZSI6InNhbmRhbCIsImVtYWlsIjoic2FuZGFsZ3VudW5ncmlraUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRHRzZveTlYblJFNGpjVWtVMFFGekZPNmNoS09LVkhWaS5SN2NxLk9TdzZtWEcxZHpRMTdNdSIsInBob25lX251bWJlciI6bnVsbCwicGhvdG8iOm51bGwsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDhUMTI6MzM6MzYuMDg1WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDhUMTI6MzM6MzYuMDg1WiIsImxldmVsIjoyLCJ1dWlkIjoiYzczMjU2YzktN2Y1Yi00YmUxLTg2YTgtNDA4YzI4YWYwZmVjIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTk0NDMyODksImV4cCI6MTY5OTUyOTY4OX0.RgyKw8CniFw-wJNDtukbNjLEnet38Rc5lwl59lfl7Kk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/recipe?page=1&limit=10&sort=updated_time",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recipe"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "air",
+									"disabled": true
+								},
+								{
+									"key": "search_by",
+									"value": "ingredients",
+									"description": "title | ingredients | default: title",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "number, defalut: 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "number, default: 10"
+								},
+								{
+									"key": "sort",
+									"value": "updated_time",
+									"description": "title | updated_time | category | default: updated_time"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail recipes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0NSwibmFtZSI6InNhbmRhbCIsImVtYWlsIjoic2FuZGFsZ3VudW5ncmlraUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRMRU9iREpHRng0RkdxZEUwL1ByRXNlLmNROHRlbm5GcFlaTHJyQjJNbXhlT2ZDamp3d3JqRyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsImxldmVsIjoyLCJ1dWlkIjoiNGI2M2UyZWYtOGNiYi00MjdlLTlhOGYtN2EzNmU3NzIzMzZhIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTkyNzUzNjksImV4cCI6MTY5OTM2MTc2OX0.Wf24T6v4Ucq7nRrbDWXmcMoAt_IB0d9iOzrXnPqXO0Q",
 								"type": "text",
 								"disabled": true
 							}
@@ -42,33 +101,30 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/recipe?search=nasi&page=1&limit=10&sort=category",
+							"raw": "{{base_url}}/recipe/detail/62",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"recipe"
+								"recipe",
+								"detail",
+								"62"
 							],
 							"query": [
 								{
-									"key": "search",
-									"value": "nasi",
-									"description": "serch by title"
-								},
-								{
 									"key": "page",
-									"value": "1",
-									"description": "number, defalut: 1"
+									"value": "2",
+									"disabled": true
 								},
 								{
 									"key": "limit",
 									"value": "10",
-									"description": "number, default: 10"
+									"disabled": true
 								},
 								{
 									"key": "sort",
-									"value": "category",
-									"description": "title | updated_time | category | default: updated_time"
+									"value": "created_time",
+									"disabled": true
 								}
 							]
 						}
@@ -76,7 +132,7 @@
 					"response": []
 				},
 				{
-					"name": "my recipes",
+					"name": "my recipes (users and admin)",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -85,9 +141,8 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
-								"type": "text",
-								"disabled": true
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyMSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRzVEV0Y2pTeTl4REpwS2c2WUZJdlZ1SXhwbUU5MTh1MW1VNDFkLjJTQTdrZVpIWno1THp3SyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTA6NTk6MDguMTA1WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTA6NTk6MDguMTA1WiIsImxldmVsIjoxLCJ1dWlkIjoiZjZmYjIxMWUtMmYyZS00YjA0LWI0MWQtYWQ5OTBkNTZhMmFkIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTk0MDg2NTgsImV4cCI6MTY5OTQ5NTA1OH0.DBiw2tYxAJ3Obm253jx8B3S5l4fpR3-APuTw65pzCmQ",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -136,7 +191,7 @@
 					"response": []
 				},
 				{
-					"name": "detail recipes",
+					"name": "recipes by id user (users and admin)",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -145,52 +200,46 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
-								"type": "text",
-								"disabled": true
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyMSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRzVEV0Y2pTeTl4REpwS2c2WUZJdlZ1SXhwbUU5MTh1MW1VNDFkLjJTQTdrZVpIWno1THp3SyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTA6NTk6MDguMTA1WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTA6NTk6MDguMTA1WiIsImxldmVsIjoxLCJ1dWlkIjoiZjZmYjIxMWUtMmYyZS00YjA0LWI0MWQtYWQ5OTBkNTZhMmFkIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTkyNzY4NTYsImV4cCI6MTY5OTM2MzI1Nn0.LtXRJvku2dTM5qiHqXirA2C9RG8y92AkAnqYfCqQBxk",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "Key",
-									"value": "Value",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "Key",
-									"value": "Value",
-									"type": "text",
-									"disabled": true
-								}
-							]
+							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{base_url}}/recipe/detail/46",
+							"raw": "{{base_url}}/recipe/321cba",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recipe",
-								"detail",
-								"46"
+								"321cba"
 							],
 							"query": [
 								{
+									"key": "search",
+									"value": "nasi",
+									"description": "serch by title",
+									"disabled": true
+								},
+								{
 									"key": "page",
-									"value": "2",
+									"value": "1",
+									"description": "number, defalut: 1",
 									"disabled": true
 								},
 								{
 									"key": "limit",
 									"value": "10",
+									"description": "number, default: 10",
 									"disabled": true
 								},
 								{
 									"key": "sort",
-									"value": "created_time",
+									"value": "category",
+									"description": "title | updated_time | category | default: updated_time",
 									"disabled": true
 								}
 							]
@@ -199,41 +248,40 @@
 					"response": []
 				},
 				{
-					"name": "recipe",
+					"name": "recipe (users and admin)",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
-								"type": "text",
-								"disabled": true
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo2NSwibmFtZSI6IkJ1ZGkiLCJlbWFpbCI6InNhbmRhbGd1bnVuZ3Jpa2lAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkc1lzZ3I5WWsybnFhVXNQU21KQkNuZWR6djVvdlhCakpTOXFvM2M3YlFXSHJBME5XTE9mbmkiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjEiLCJwaG90byI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2R6ZXRlZjF4MC9pbWFnZS91cGxvYWQvdjE2OTk1NDQwODIvcmVjaXBlcy9wc3dveWxrNzU5bTNlbDUzdHMxcy5qcGciLCJjcmVhdGVkX3RpbWUiOiIyMDIzLTExLTA5VDE0OjM2OjUzLjU1M1oiLCJ1cGRhdGVkX3RpbWUiOiIyMDIzLTExLTA5VDE2OjM1OjEzLjc0M1oiLCJsZXZlbCI6MiwidXVpZCI6ImQ0MzFlM2Q0LWQ2ODktNDlkMC1iMmRjLThiZTNkNWNhM2I4OCIsImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjk5NTQ0MTI5LCJleHAiOjE2OTk2MzA1Mjl9.WeMNIzYtcMd1sWgPCs7XbrP9pftxyU0lkdc7BliwPMc",
+								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "photo",
-									"value": "https://source.unsplash.com/random?food",
 									"description": "required",
-									"type": "text"
+									"type": "file",
+									"src": "/C:/Users/Riki Muhammad/Downloads/Banana Smothie Pop.png"
 								},
 								{
 									"key": "title",
-									"value": "Nasi Goreng",
+									"value": "Pisang goreng Manis",
 									"description": "required",
 									"type": "text"
 								},
 								{
 									"key": "ingredients",
-									"value": "Nasi,Garam,Kecap,Bawang merah dan bawang putih,telur dan daging ayam,cabai ",
+									"value": "Pisang, gula, minyak, dll.",
 									"description": "required",
 									"type": "text"
 								},
 								{
 									"key": "id_category",
-									"value": "1",
+									"value": "2",
 									"description": "Main Course = 1 | Dessert = 2 | Appetizer = 5",
 									"type": "text"
 								}
@@ -252,38 +300,33 @@
 					"response": []
 				},
 				{
-					"name": "recipe",
+					"name": "recipe (only owner recipe)",
 					"request": {
 						"method": "PUT",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
-								"type": "text",
-								"disabled": true
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyMSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRzVEV0Y2pTeTl4REpwS2c2WUZJdlZ1SXhwbUU5MTh1MW1VNDFkLjJTQTdrZVpIWno1THp3SyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTA6NTk6MDguMTA1WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTA6NTk6MDguMTA1WiIsImxldmVsIjoxLCJ1dWlkIjoiZjZmYjIxMWUtMmYyZS00YjA0LWI0MWQtYWQ5OTBkNTZhMmFkIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTk0MDg2NTgsImV4cCI6MTY5OTQ5NTA1OH0.DBiw2tYxAJ3Obm253jx8B3S5l4fpR3-APuTw65pzCmQ",
+								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "photo",
-									"value": "https://source.unsplash.com/random?food",
-									"description": "required",
-									"type": "text",
+									"type": "file",
+									"src": [],
 									"disabled": true
 								},
 								{
 									"key": "title",
-									"value": "Dodol Garut",
-									"description": "required",
-									"type": "text",
-									"disabled": true
+									"value": "tes edit resep",
+									"type": "text"
 								},
 								{
 									"key": "ingredients",
-									"value": "Tepung Ketan,Gula Merah,Santan Kelapa",
-									"description": "required",
+									"value": "",
 									"type": "text",
 									"disabled": true
 								},
@@ -291,43 +334,68 @@
 									"key": "id_category",
 									"value": "1",
 									"description": "Main Course = 1 | Dessert = 2 | Appetizer = 5",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/recipe/45",
+							"raw": "{{base_url}}/recipe/61",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recipe",
-								"45"
+								"61"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "recipes by id",
+					"name": "recipes by id (only owner recipe)",
 					"request": {
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
-								"type": "text",
-								"disabled": true
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyMSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRzVEV0Y2pTeTl4REpwS2c2WUZJdlZ1SXhwbUU5MTh1MW1VNDFkLjJTQTdrZVpIWno1THp3SyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTc6NTk6MDguMTA1WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTc6NTk6MDguMTA1WiIsImxldmVsIjoxLCJ1dWlkIjoiZjZmYjIxMWUtMmYyZS00YjA0LWI0MWQtYWQ5OTBkNTZhMmFkIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTk0NDUyODEsImV4cCI6MTY5OTUzMTY4MX0.ZX0ck5KVXhKHky1fK-1KAszzqWtnuWnt8EHvlmePYQA",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recipe/47",
+							"raw": "{{base_url}}/recipe/54",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recipe",
-								"47"
+								"54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recipes by admin (only admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyMSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRzVEV0Y2pTeTl4REpwS2c2WUZJdlZ1SXhwbUU5MTh1MW1VNDFkLjJTQTdrZVpIWno1THp3SyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTc6NTk6MDguMTA1WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTc6NTk6MDguMTA1WiIsImxldmVsIjoxLCJ1dWlkIjoiZjZmYjIxMWUtMmYyZS00YjA0LWI0MWQtYWQ5OTBkNTZhMmFkIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTk0NDUyODEsImV4cCI6MTY5OTUzMTY4MX0.ZX0ck5KVXhKHky1fK-1KAszzqWtnuWnt8EHvlmePYQA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/recipe/deleteByAdmin/54",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recipe",
+								"deleteByAdmin",
+								"54"
 							]
 						}
 					},
@@ -339,15 +407,14 @@
 			"name": "category",
 			"item": [
 				{
-					"name": "category",
+					"name": "category (all role)",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
-								"type": "text",
-								"disabled": true
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyMSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRzVEV0Y2pTeTl4REpwS2c2WUZJdlZ1SXhwbUU5MTh1MW1VNDFkLjJTQTdrZVpIWno1THp3SyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTA6NTk6MDguMTA1WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTA6NTk6MDguMTA1WiIsImxldmVsIjoxLCJ1dWlkIjoiZjZmYjIxMWUtMmYyZS00YjA0LWI0MWQtYWQ5OTBkNTZhMmFkIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTk1MzQ5OTEsImV4cCI6MTY5OTYyMTM5MX0.CbRHHpE41lFQYaLOI8OsidGI_Gw-xEEYdcsRrpHb-8k",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -363,15 +430,14 @@
 					"response": []
 				},
 				{
-					"name": "category by id",
+					"name": "category by id (all role)",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
-								"type": "text",
-								"disabled": true
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0NSwibmFtZSI6InNhbmRhbCIsImVtYWlsIjoic2FuZGFsZ3VudW5ncmlraUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRMRU9iREpHRng0RkdxZEUwL1ByRXNlLmNROHRlbm5GcFlaTHJyQjJNbXhlT2ZDamp3d3JqRyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsImxldmVsIjoyLCJ1dWlkIjoiNGI2M2UyZWYtOGNiYi00MjdlLTlhOGYtN2EzNmU3NzIzMzZhIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTkyNzUzNjksImV4cCI6MTY5OTM2MTc2OX0.Wf24T6v4Ucq7nRrbDWXmcMoAt_IB0d9iOzrXnPqXO0Q",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -386,23 +452,82 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "users",
-			"item": [
+				},
 				{
-					"name": "users",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "category (only admin)",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0NSwibmFtZSI6InNhbmRhbCIsImVtYWlsIjoic2FuZGFsZ3VudW5ncmlraUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRMRU9iREpHRng0RkdxZEUwL1ByRXNlLmNROHRlbm5GcFlaTHJyQjJNbXhlT2ZDamp3d3JqRyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsImxldmVsIjoyLCJ1dWlkIjoiNGI2M2UyZWYtOGNiYi00MjdlLTlhOGYtN2EzNmU3NzIzMzZhIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTkyNzUzNjksImV4cCI6MTY5OTM2MTc2OX0.Wf24T6v4Ucq7nRrbDWXmcMoAt_IB0d9iOzrXnPqXO0Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Italian Foods",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/category",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category (only admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0NSwibmFtZSI6InNhbmRhbCIsImVtYWlsIjoic2FuZGFsZ3VudW5ncmlraUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRMRU9iREpHRng0RkdxZEUwL1ByRXNlLmNROHRlbm5GcFlaTHJyQjJNbXhlT2ZDamp3d3JqRyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsImxldmVsIjoyLCJ1dWlkIjoiNGI2M2UyZWYtOGNiYi00MjdlLTlhOGYtN2EzNmU3NzIzMzZhIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTkyNzUzNjksImV4cCI6MTY5OTM2MTc2OX0.Wf24T6v4Ucq7nRrbDWXmcMoAt_IB0d9iOzrXnPqXO0Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Brazilian Foods",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/category/8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category (only admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0NSwibmFtZSI6InNhbmRhbCIsImVtYWlsIjoic2FuZGFsZ3VudW5ncmlraUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRMRU9iREpHRng0RkdxZEUwL1ByRXNlLmNROHRlbm5GcFlaTHJyQjJNbXhlT2ZDamp3d3JqRyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsImxldmVsIjoyLCJ1dWlkIjoiNGI2M2UyZWYtOGNiYi00MjdlLTlhOGYtN2EzNmU3NzIzMzZhIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTkyNzUzNjksImV4cCI6MTY5OTM2MTc2OX0.Wf24T6v4Ucq7nRrbDWXmcMoAt_IB0d9iOzrXnPqXO0Q",
 								"type": "text"
 							}
 						],
@@ -411,7 +536,43 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "{{base_url}}/users?sort=created_time",
+							"raw": "{{base_url}}/category/8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "users (all role)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo2NCwibmFtZSI6IkJ1ZGkiLCJlbWFpbCI6InNhbmRhbGd1bnVuZ3Jpa2lAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkUmd3SXdzdGUzSXVFVGRlLkRhNzFTdTdWUWExQ3diMC9ITExmWHZobEJHN0hJeWVlSUE2OUciLCJwaG9uZV9udW1iZXIiOm51bGwsInBob3RvIjpudWxsLCJjcmVhdGVkX3RpbWUiOiIyMDIzLTExLTA5VDEzOjI3OjMyLjA5NFoiLCJ1cGRhdGVkX3RpbWUiOiIyMDIzLTExLTA5VDEzOjI3OjMyLjA5NFoiLCJsZXZlbCI6MiwidXVpZCI6IjEwNTI4NDJiLWNiZDgtNDViYy1iZDk4LWQ0ZmM0ZTQzMjg2OCIsImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjk5NTMyOTY1LCJleHAiOjE2OTk2MTkzNjV9.P2hdVHg8XRhPLjwuDYjrX-C9LOFzjSMXzgcq8Js0Mho",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/users?page=1&sort=created_time",
 							"host": [
 								"{{base_url}}"
 							],
@@ -421,13 +582,13 @@
 							"query": [
 								{
 									"key": "search",
-									"value": "",
+									"value": "riki",
+									"description": "search by name",
 									"disabled": true
 								},
 								{
 									"key": "page",
-									"value": "1",
-									"disabled": true
+									"value": "1"
 								},
 								{
 									"key": "limit",
@@ -444,102 +605,100 @@
 					"response": []
 				},
 				{
-					"name": "user by id",
+					"name": "user by id (all role)",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo1OSwibmFtZSI6InNhbmRhbCIsImVtYWlsIjoic2FuZGFsZ3VudW5ncmlraUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR0ZjUwY3BhMU5MZWVIMEdIQnk4TVplMFQuMlMuZzdKUnlzWG1Jcjd4T3h1N1JFWWx1c3hmLiIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZHpldGVmMXgwL2ltYWdlL3VwbG9hZC92MTY5OTQzMTY2NC91c2Vyc19yZWNpcGVzL3pwcHVpdmZyaW90b3owZDRybGM4LnBuZyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDhUMDk6MjE6MDUuNTk1WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDhUMDk6MjE6MDUuNTk1WiIsImxldmVsIjoyLCJ1dWlkIjoiOTUwNTlkZWMtNDg4Ny00MmM0LTg1ODEtNDIwZTNhNTliOWEwIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTk0MzE3MTQsImV4cCI6MTY5OTUxODExNH0.ZtQKRLKjTdX2x5rx3xqo8cCYapvntWpBYRmv3KbBc_c",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/users/13",
+							"raw": "{{base_url}}/users/c73256c9-7f5b-4be1-86a8-408c28af0fec",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"users",
-								"13"
+								"c73256c9-7f5b-4be1-86a8-408c28af0fec"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "user",
+					"name": "user (only owner)",
 					"request": {
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0NSwibmFtZSI6IkJ1ZGkiLCJlbWFpbCI6InNhbmRhbGd1bnVuZ3Jpa2lAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkb0d3RUFxY25LajRTVXlPSW02WGFOdUlRY21yNzV4a3RObjJkQm5ta2oxRHQ2bS91NDU3bkMiLCJwaG9uZV9udW1iZXIiOiIwODY1NDM0MjU2NyIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTU6MTIuNzU4WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDZUMTM6NTk6MzcuOTg3WiIsImxldmVsIjoyLCJ1dWlkIjoiNGI2M2UyZWYtOGNiYi00MjdlLTlhOGYtN2EzNmU3NzIzMzZhIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTkyNzY3MzEsImV4cCI6MTY5OTM2MzEzMX0.4WgYUC07z7RPzvILHZ8PJ_4MU7Okd0lTaOhuJmTE4pY",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/users/18",
+							"raw": "{{base_url}}/users/4b63e2ef-8cbb-427e-9a8f-7a36e772336a",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"users",
-								"18"
+								"4b63e2ef-8cbb-427e-9a8f-7a36e772336a"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "user",
+					"name": "user (only owner)",
 					"request": {
 						"method": "PUT",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InRlc3RpbmciLCJlbWFpbCI6InRldHNpbmdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkV090eVkuV29KWGlPWU5YOUMvQndzLmpRYVZuNkJTYjVtLzNMQ0c3ZEtBMUswWFlhaFRFUGEiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE5MCIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDFUMDk6Mzk6MzMuMjA2WiIsImlhdCI6MTY5ODgyODE0NX0.62GZpNio8iHxa4ARESlnCn4swmdhncLgYaA0K3aXcjA",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo2NSwibmFtZSI6IkJ1ZGkiLCJlbWFpbCI6InNhbmRhbGd1bnVuZ3Jpa2lAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMmRCWWFFNDNoZDVvRy5hUjRMZzhMTzQ1dHZ3cnlaN1R4a2lsOW5RZVBIT3RHUFAwWndCVmEiLCJwaG9uZV9udW1iZXIiOm51bGwsInBob3RvIjpudWxsLCJjcmVhdGVkX3RpbWUiOiIyMDIzLTExLTA5VDE0OjM2OjUzLjU1M1oiLCJ1cGRhdGVkX3RpbWUiOiIyMDIzLTExLTA5VDE0OjM2OjUzLjU1M1oiLCJsZXZlbCI6MiwidXVpZCI6ImQ0MzFlM2Q0LWQ2ODktNDlkMC1iMmRjLThiZTNkNWNhM2I4OCIsImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjk5NTM3MDUzLCJleHAiOjE2OTk2MjM0NTN9.zOIuhT0-utGn9AvJwbcEQwAxJ08lyvTVz_WzwY-OJ4w",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "name",
-									"value": "riki muhmmad",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "rikimuhammad@gmail.com",
-									"type": "text"
+									"value": "Yuli",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "password",
-									"value": "123456",
-									"type": "text"
+									"value": "12345678",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "phone_number",
-									"value": "087654321454",
+									"value": "087654321",
 									"type": "text"
 								},
 								{
 									"key": "photo",
-									"value": "https://source.unsplash.com/random?users",
-									"type": "text"
+									"type": "file",
+									"src": "/D:/Bootcamp PijarCamp/materi/Coding/Week 1 - Basic Computer Science, Git, JS1/Basic Computer Science.pdf",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/users/13",
+							"raw": "{{base_url}}/users/d431e3d4-d689-49d0-b2dc-8be3d5ca3b88",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"users",
-								"13"
+								"d431e3d4-d689-49d0-b2dc-8be3d5ca3b88"
 							]
 						}
 					},
@@ -551,6 +710,44 @@
 			"name": "auth",
 			"item": [
 				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Budi",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sandalgunungriki@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "budi1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "login",
 					"request": {
 						"method": "POST",
@@ -560,12 +757,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "user4@gmail.com",
+									"value": "sandalgunungriki@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "user4",
+									"value": "budi1234",
 									"type": "text"
 								}
 							]
@@ -584,7 +781,7 @@
 					"response": []
 				},
 				{
-					"name": "register",
+					"name": "refresh token",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -592,40 +789,235 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "name",
-									"value": "user4",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "user4@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "user4",
-									"type": "text"
-								},
-								{
-									"key": "phone_number",
-									"value": "081122334455",
-									"type": "text"
-								},
-								{
-									"key": "photo",
-									"value": "https://source.unsplash.com/random?users",
+									"key": "refreshToken",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo2NCwibmFtZSI6IkJ1ZGkiLCJlbWFpbCI6InNhbmRhbGd1bnVuZ3Jpa2lAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkUmd3SXdzdGUzSXVFVGRlLkRhNzFTdTdWUWExQ3diMC9ITExmWHZobEJHN0hJeWVlSUE2OUciLCJwaG9uZV9udW1iZXIiOm51bGwsInBob3RvIjpudWxsLCJjcmVhdGVkX3RpbWUiOiIyMDIzLTExLTA5VDEzOjI3OjMyLjA5NFoiLCJ1cGRhdGVkX3RpbWUiOiIyMDIzLTExLTA5VDEzOjI3OjMyLjA5NFoiLCJsZXZlbCI6MiwidXVpZCI6IjEwNTI4NDJiLWNiZDgtNDViYy1iZDk4LWQ0ZmM0ZTQzMjg2OCIsImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjk5NTMyOTI5LCJleHAiOjE3MzEwOTA1Mjl9.aYfI-qTiZ79-8Y2eDn-hLjUuoVNBuCzLokZ0OUq89V0",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/auth/register",
+							"raw": "{{base_url}}/auth/refresh",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"auth",
-								"register"
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "event",
+			"item": [
+				{
+					"name": "event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InJpa2kgbXVobW1hZCBudXJoaWRheWF0IiwiZW1haWwiOiJyaWtpbXVoYW1tYWRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkZ0E1MC5PNUNITlVjZEtZZXNpVk5CLlg1YVpsRDRTb0R6ZUdtbXdmMkZZb2tYTmdnNGdjcGkiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE0NTQiLCJwaG90byI6Imh0dHBzOi8vc291cmNlLnVuc3BsYXNoLmNvbS9yYW5kb20_dXNlcnMiLCJjcmVhdGVkX3RpbWUiOiIyMDIzLTExLTAxVDA5OjM5OjMzLjIwNloiLCJ1cGRhdGVkX3RpbWUiOiIyMDIzLTExLTAzVDExOjQzOjI1LjU2MFoiLCJsZXZlbCI6MiwidXVpZCI6IjMyMWNiYSIsImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjk5NTMzNzgxLCJleHAiOjE2OTk2MjAxODF9.C0JErJ7kjWUdS_RopEdsmzLKeauTNxyZa3fXD1nvYR0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "recipes_id",
+									"value": "35",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "like",
+									"description": "bookmark | like",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/event",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InJpa2kgbXVobW1hZCBudXJoaWRheWF0IiwiZW1haWwiOiJyaWtpbXVoYW1tYWRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkZ0E1MC5PNUNITlVjZEtZZXNpVk5CLlg1YVpsRDRTb0R6ZUdtbXdmMkZZb2tYTmdnNGdjcGkiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE0NTQiLCJwaG90byI6Imh0dHBzOi8vc291cmNlLnVuc3BsYXNoLmNvbS9yYW5kb20_dXNlcnMiLCJjcmVhdGVkX3RpbWUiOiIyMDIzLTExLTAxVDA5OjM5OjMzLjIwNloiLCJ1cGRhdGVkX3RpbWUiOiIyMDIzLTExLTAzVDExOjQzOjI1LjU2MFoiLCJsZXZlbCI6MiwidXVpZCI6IjMyMWNiYSIsImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjk5NTM1NDg4LCJleHAiOjE2OTk2MjE4ODh9._1AJ62torBrMNyQ3ki8-hRoJwkPmGANfZXs4yc8P8lE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/event",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my bookmark",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InJpa2kgbXVobW1hZCBudXJoaWRheWF0IiwiZW1haWwiOiJyaWtpbXVoYW1tYWRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkZ0E1MC5PNUNITlVjZEtZZXNpVk5CLlg1YVpsRDRTb0R6ZUdtbXdmMkZZb2tYTmdnNGdjcGkiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE0NTQiLCJwaG90byI6Imh0dHBzOi8vc291cmNlLnVuc3BsYXNoLmNvbS9yYW5kb20_dXNlcnMiLCJjcmVhdGVkX3RpbWUiOiIyMDIzLTExLTAxVDA5OjM5OjMzLjIwNloiLCJ1cGRhdGVkX3RpbWUiOiIyMDIzLTExLTAzVDExOjQzOjI1LjU2MFoiLCJsZXZlbCI6MiwidXVpZCI6IjMyMWNiYSIsImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjk5NTMzNzgxLCJleHAiOjE2OTk2MjAxODF9.C0JErJ7kjWUdS_RopEdsmzLKeauTNxyZa3fXD1nvYR0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/event/bookmarked?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"event",
+								"bookmarked"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my like",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InJpa2kgbXVobW1hZCBudXJoaWRheWF0IiwiZW1haWwiOiJyaWtpbXVoYW1tYWRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkZ0E1MC5PNUNITlVjZEtZZXNpVk5CLlg1YVpsRDRTb0R6ZUdtbXdmMkZZb2tYTmdnNGdjcGkiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE0NTQiLCJwaG90byI6Imh0dHBzOi8vc291cmNlLnVuc3BsYXNoLmNvbS9yYW5kb20_dXNlcnMiLCJjcmVhdGVkX3RpbWUiOiIyMDIzLTExLTAxVDA5OjM5OjMzLjIwNloiLCJ1cGRhdGVkX3RpbWUiOiIyMDIzLTExLTAzVDExOjQzOjI1LjU2MFoiLCJsZXZlbCI6MiwidXVpZCI6IjMyMWNiYSIsImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjk5NTMzNzgxLCJleHAiOjE2OTk2MjAxODF9.C0JErJ7kjWUdS_RopEdsmzLKeauTNxyZa3fXD1nvYR0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/event/liked?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"event",
+								"liked"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event bookmark (only owner)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyMSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRzVEV0Y2pTeTl4REpwS2c2WUZJdlZ1SXhwbUU5MTh1MW1VNDFkLjJTQTdrZVpIWno1THp3SyIsInBob25lX251bWJlciI6IjA4MTEyMjMzNDQ1NSIsInBob3RvIjoiaHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL3JhbmRvbT91c2VycyIsImNyZWF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTc6NTk6MDguMTA1WiIsInVwZGF0ZWRfdGltZSI6IjIwMjMtMTEtMDNUMTc6NTk6MDguMTA1WiIsImxldmVsIjoxLCJ1dWlkIjoiZjZmYjIxMWUtMmYyZS00YjA0LWI0MWQtYWQ5OTBkNTZhMmFkIiwiaXNfYWN0aXZlIjp0cnVlLCJpYXQiOjE2OTk0NDUyODEsImV4cCI6MTY5OTUzMTY4MX0.ZX0ck5KVXhKHky1fK-1KAszzqWtnuWnt8EHvlmePYQA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/event/bookmark/46",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"event",
+								"bookmark",
+								"46"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event like (only owner)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxMywibmFtZSI6InJpa2kgbXVobW1hZCBudXJoaWRheWF0IiwiZW1haWwiOiJyaWtpbXVoYW1tYWRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkZ0E1MC5PNUNITlVjZEtZZXNpVk5CLlg1YVpsRDRTb0R6ZUdtbXdmMkZZb2tYTmdnNGdjcGkiLCJwaG9uZV9udW1iZXIiOiIwODc2NTQzMjE0NTQiLCJwaG90byI6Imh0dHBzOi8vc291cmNlLnVuc3BsYXNoLmNvbS9yYW5kb20_dXNlcnMiLCJjcmVhdGVkX3RpbWUiOiIyMDIzLTExLTAxVDA5OjM5OjMzLjIwNloiLCJ1cGRhdGVkX3RpbWUiOiIyMDIzLTExLTAzVDExOjQzOjI1LjU2MFoiLCJsZXZlbCI6MiwidXVpZCI6IjMyMWNiYSIsImlzX2FjdGl2ZSI6dHJ1ZSwiaWF0IjoxNjk5NDU4MTY5LCJleHAiOjE2OTk1NDQ1Njl9.Cs2uKe5Sl6765ot3qGzZKrjJ_I9QBhguqz67YavRZzg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/event/like/52",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"event",
+								"like",
+								"52"
 							]
 						}
 					},
