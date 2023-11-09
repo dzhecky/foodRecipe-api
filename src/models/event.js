@@ -25,9 +25,9 @@ const selectAllEvent = async () => {
   });
 };
 
-const selectEventByIdRecipe = async (recipes_id) => {
+const selectEventById = async (id) => {
   return new Promise((resolve, reject) => {
-    Pool.query(`SELECT * FROM event WHERE recipes_id=${recipes_id}`, (err, result) => {
+    Pool.query(`SELECT * FROM event WHERE id=${id}`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
@@ -37,9 +37,9 @@ const selectEventByIdRecipe = async (recipes_id) => {
   });
 };
 
-const deleteBookmarkByIdRecipe = async (recipes_id) => {
+const deleteBookmarkById = async (id) => {
   return new Promise((resolve, reject) => {
-    Pool.query(`DELETE FROM event WHERE recipes_id=${recipes_id} AND status='bookmark'`, (err, result) => {
+    Pool.query(`DELETE FROM event WHERE id=${id} AND status='bookmark'`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
@@ -49,9 +49,9 @@ const deleteBookmarkByIdRecipe = async (recipes_id) => {
   });
 };
 
-const deleteLikeByIdRecipe = async (recipes_id) => {
+const deleteLikeById = async (id) => {
   return new Promise((resolve, reject) => {
-    Pool.query(`DELETE FROM event WHERE recipes_id=${recipes_id} AND status='like'`, (err, result) => {
+    Pool.query(`DELETE FROM event WHERE id=${id} AND status='like'`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
@@ -64,7 +64,7 @@ const deleteLikeByIdRecipe = async (recipes_id) => {
 const selectMyBookmark = async (users_id, paging) => {
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipes.id_recipe, recipes.photo, recipes.title, recipes.ingredients, users.name AS author, category.name AS category, event.status FROM event JOIN recipes ON event.recipes_id = recipes.id_recipe JOIN users ON recipes.uuid = users.uuid JOIN category ON recipes.id_category = category.id_category WHERE event.users_id='${users_id}' AND event.status='bookmark' ORDER BY created_at DESC LIMIT ${paging.limit} OFFSET ${paging.offset}`,
+      `SELECT event.id, recipes.id_recipe, recipes.photo, recipes.title, recipes.ingredients, users.name AS author, category.name AS category, event.status FROM event JOIN recipes ON event.recipes_id = recipes.id_recipe JOIN users ON recipes.uuid = users.uuid JOIN category ON recipes.id_category = category.id_category WHERE event.users_id='${users_id}' AND event.status='bookmark' ORDER BY created_at DESC LIMIT ${paging.limit} OFFSET ${paging.offset}`,
       (err, result) => {
         if (!err) {
           return resolve(result);
@@ -79,7 +79,7 @@ const selectMyBookmark = async (users_id, paging) => {
 const selectMyLike = async (users_id, paging) => {
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipes.id_recipe, recipes.photo, recipes.title, recipes.ingredients, users.name AS author, category.name AS category, event.status FROM event JOIN recipes ON event.recipes_id = recipes.id_recipe JOIN users ON recipes.uuid = users.uuid JOIN category ON recipes.id_category = category.id_category WHERE event.users_id='${users_id}' AND event.status='like' ORDER BY created_at DESC LIMIT ${paging.limit} OFFSET ${paging.offset}`,
+      `SELECT event.id, recipes.id_recipe, recipes.photo, recipes.title, recipes.ingredients, users.name AS author, category.name AS category, event.status FROM event JOIN recipes ON event.recipes_id = recipes.id_recipe JOIN users ON recipes.uuid = users.uuid JOIN category ON recipes.id_category = category.id_category WHERE event.users_id='${users_id}' AND event.status='like' ORDER BY created_at DESC LIMIT ${paging.limit} OFFSET ${paging.offset}`,
       (err, result) => {
         if (!err) {
           return resolve(result);
@@ -139,9 +139,9 @@ const checkIsLike = async (recipes_id, users_id) => {
   });
 };
 
-const getIdOwnerEvent = async (recipes_id) => {
+const getIdOwnerEvent = async (id) => {
   return new Promise((resolve, reject) => {
-    Pool.query(`SELECT * FROM event WHERE recipes_id=${recipes_id}`, (err, result) => {
+    Pool.query(`SELECT * FROM event WHERE id=${id}`, (err, result) => {
       if (!err) {
         return resolve(result);
       } else {
@@ -151,4 +151,4 @@ const getIdOwnerEvent = async (recipes_id) => {
   });
 };
 
-module.exports = { insertEvent, selectAllEvent, selectEventByIdRecipe, deleteBookmarkByIdRecipe, selectMyBookmark, selectMyLike, countMyBookmark, countMyLike, deleteLikeByIdRecipe, checkIsBookmark, checkIsLike, getIdOwnerEvent };
+module.exports = { insertEvent, selectAllEvent, selectEventById, deleteBookmarkById, selectMyBookmark, selectMyLike, countMyBookmark, countMyLike, deleteLikeById, checkIsBookmark, checkIsLike, getIdOwnerEvent };

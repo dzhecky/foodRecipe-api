@@ -67,8 +67,8 @@ module.exports = {
 
   eventOwner: async (req, res, next) => {
     let idUser = req.user.uuid;
-    let idRecipe = req.params.id;
-    let event = await getIdOwnerEvent(idRecipe);
+    let id = req.params.id;
+    let event = await getIdOwnerEvent(id);
 
     if (!event.rowCount) {
       next();

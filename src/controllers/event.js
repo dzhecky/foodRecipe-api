@@ -1,4 +1,4 @@
-const { insertEvent, selectAllEvent, deleteBookmarkByIdRecipe, deleteLikeByIdRecipe, selectEventByIdRecipe, selectMyBookmark, selectMyLike, countMyBookmark, countMyLike, checkIsBookmark, checkIsLike } = require('../models/event');
+const { insertEvent, selectAllEvent, deleteBookmarkById, deleteLikeById, selectEventById, selectMyBookmark, selectMyLike, countMyBookmark, countMyLike, checkIsBookmark, checkIsLike } = require('../models/event');
 const { selectRecipeById } = require('../models/recipes');
 const createPagination = require('../utils/createPagination');
 
@@ -102,9 +102,9 @@ const eventController = {
   },
 
   deleteEventBookmark: async (req, res) => {
-    let recipes_id = req.params.id;
+    let id = req.params.id;
 
-    let data = await selectEventByIdRecipe(recipes_id);
+    let data = await selectEventById(id);
     let result = data.rows[0];
 
     if (!result) {
@@ -115,7 +115,7 @@ const eventController = {
       });
     }
 
-    await deleteBookmarkByIdRecipe(recipes_id);
+    await deleteBookmarkById(id);
     res.status(200).json({
       code: 200,
       message: 'Success delete data!',
@@ -123,9 +123,9 @@ const eventController = {
   },
 
   deleteEventLike: async (req, res) => {
-    let recipes_id = req.params.id;
+    let id = req.params.id;
 
-    let data = await selectEventByIdRecipe(recipes_id);
+    let data = await selectEventById(id);
     let result = data.rows[0];
 
     if (!result) {
@@ -136,7 +136,7 @@ const eventController = {
       });
     }
 
-    await deleteLikeByIdRecipe(recipes_id);
+    await deleteLikeById(id);
     res.status(200).json({
       code: 200,
       message: 'Success delete data!',
