@@ -221,24 +221,30 @@ const recipesController = {
 
     // check photo
     if (!req.file) {
-      newData.photo = data.photo;
-      let result = await updateRecipe(newData);
+      if (req.isFileValid === undefined || req.isFileValid) {
+        newData.photo = data.photo;
+        let result = await updateRecipe(newData);
 
-      if (!result) {
+        if (!result) {
+          return res.status(404).json({
+            code: 404,
+            message: 'Failed update data!',
+          });
+        }
+
+        return res.status(200).json({
+          code: 200,
+          message: 'Success update data!',
+        });
+      } else {
         return res.status(404).json({
-          code: 404,
-          message: 'Failed update data!',
+          messsage: 'failed update data, photo must be image file',
         });
       }
-
-      res.status(200).json({
-        code: 200,
-        message: 'Success update data!',
-      });
     }
 
     if (req.file) {
-      if (!req.isFileValid) {
+      if (req.isFileValid === false) {
         return res.status(404).json({
           messsage: 'failed update data, photo must be image file',
         });
