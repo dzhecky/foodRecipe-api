@@ -6,9 +6,10 @@ const categoryController = {
     let result = data.rows;
 
     if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed get data!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
+        data: [],
       });
     }
 
@@ -26,9 +27,10 @@ const categoryController = {
     let result = data.rows[0];
 
     if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed get data!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
+        data: [],
       });
     }
     res.status(200).json({
@@ -71,9 +73,10 @@ const categoryController = {
     let category_data = await getCategoryById(id_category);
 
     if (category_data.rowCount == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
+        data: [],
       });
     }
 
@@ -106,9 +109,10 @@ const categoryController = {
     let result = data.rows[0];
 
     if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
+        data: [],
       });
     }
     await deleteCategory(id_category);

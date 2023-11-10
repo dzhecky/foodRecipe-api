@@ -16,9 +16,9 @@ const usersController = {
     let users = await showAllUsers(paging, search, sort);
 
     if (users.rows == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed get data, data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
       });
     }
 
@@ -37,9 +37,9 @@ const usersController = {
     let result = data.rows[0];
 
     if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed, data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -57,9 +57,9 @@ const usersController = {
     let result = data.rows[0];
 
     if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
       });
     }
 
@@ -78,9 +78,9 @@ const usersController = {
     let user = await selectMyAccount(id_user);
 
     if (user.rowCount == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed, data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }

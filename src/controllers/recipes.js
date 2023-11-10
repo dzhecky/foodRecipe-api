@@ -31,9 +31,9 @@ const recipesController = {
     let data = recipes.rows;
 
     if (data.length == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed, data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -59,9 +59,9 @@ const recipesController = {
     let data = recipe.rows[0];
 
     if (!data) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed, data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -99,9 +99,9 @@ const recipesController = {
     let data = recipes.rows;
 
     if (data.length == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed, data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -185,9 +185,9 @@ const recipesController = {
     let recipe_data = await selectRecipeById(id_recipe);
 
     if (recipe_data.rowCount == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -282,9 +282,9 @@ const recipesController = {
     let result = data.rows[0];
 
     if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -317,9 +317,9 @@ const recipesController = {
     let data = recipes.rows;
 
     if (data.length == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed, data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }

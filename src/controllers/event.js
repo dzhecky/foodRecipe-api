@@ -28,9 +28,9 @@ const eventController = {
     let recipe_data = recipe.rows[0];
 
     if (!recipe_data) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed, data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -87,9 +87,9 @@ const eventController = {
     let data = event.rows;
 
     if (data.length == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed, data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -108,9 +108,9 @@ const eventController = {
     let result = data.rows[0];
 
     if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -129,9 +129,9 @@ const eventController = {
     let result = data.rows[0];
 
     if (!result) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -156,9 +156,9 @@ const eventController = {
     let result = bookmark.rows;
 
     if (result.length == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }
@@ -190,9 +190,9 @@ const eventController = {
     let result = like.rows;
 
     if (result.length == 0) {
-      return res.status(404).json({
-        code: 404,
-        message: 'Failed data not found!',
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
         data: [],
       });
     }

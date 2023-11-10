@@ -62,8 +62,8 @@ const authController = {
     let checkUser = await checkUserIsActive(id_user);
 
     if (!checkUser) {
-      return res.status(404).json({
-        code: 404,
+      return res.status(200).json({
+        code: 200,
         message: 'User not found or user has been activated!',
       });
     }
@@ -89,8 +89,8 @@ const authController = {
     //   Check email is registered?
     let checkEmail = await getUserByEmail(email);
     if (checkEmail.rows.length === 0) {
-      return res.status(400).json({
-        code: 400,
+      return res.status(200).json({
+        code: 200,
         message: 'Email not registered',
       });
     }
@@ -106,8 +106,8 @@ const authController = {
 
     // Check email is activated?
     if (checkEmail.rows[0].is_active === false) {
-      return res.status(400).json({
-        code: 400,
+      return res.status(200).json({
+        code: 200,
         message: 'Email not active, please check your email to activated',
       });
     }
@@ -133,8 +133,8 @@ const authController = {
       let user = await getUserByEmail(decoded.email);
 
       if (!user) {
-        res.status(404).json({
-          code: 404,
+        res.status(200).json({
+          code: 200,
           message: 'User not found!',
         });
       }
