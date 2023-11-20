@@ -88,6 +88,7 @@ const authController = {
 
     //   Check email is registered?
     let checkEmail = await getUserByEmail(email);
+    console.log(checkEmail);
     if (checkEmail.rows.length === 0) {
       return res.status(200).json({
         code: 200,
@@ -118,6 +119,9 @@ const authController = {
     res.status(200).json({
       code: 200,
       message: 'Login success!',
+      name: checkEmail.rows[0].name,
+      uuid: checkEmail.rows[0].uuid,
+      email: checkEmail.rows[0].email,
       token: {
         accessToken,
         refreshToken,
