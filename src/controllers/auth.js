@@ -122,6 +122,7 @@ const authController = {
       name: checkEmail.rows[0].name,
       uuid: checkEmail.rows[0].uuid,
       email: checkEmail.rows[0].email,
+      photo: checkEmail.rows[0].photo,
       token: {
         accessToken,
         refreshToken,
