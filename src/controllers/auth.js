@@ -90,8 +90,8 @@ const authController = {
     let checkEmail = await getUserByEmail(email);
     console.log(checkEmail);
     if (checkEmail.rows.length === 0) {
-      return res.status(200).json({
-        code: 200,
+      return res.status(400).json({
+        code: 400,
         message: 'Email not registered',
       });
     }
