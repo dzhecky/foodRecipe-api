@@ -1,6 +1,6 @@
 const cloudinary = require('../config/photo');
 const { getAllCategory } = require('../models/category');
-const { selectAllRecipes, selectRecipeById, inputRecipe, updateRecipe, deleteRecipeById, countAll, getRecipeByIdUser, countMyRecipe } = require('../models/recipes');
+const { selectAllRecipes, selectRecipeById, inputRecipe, updateRecipe, deleteRecipeById, countAll, getRecipeByIdUser, countMyRecipe, countRecipes } = require('../models/recipes');
 const createPagination = require('../utils/createPagination');
 
 const recipesController = {
@@ -67,9 +67,9 @@ const recipesController = {
     }
 
     // change items ingredients with split
-    let { title, ingredients, photo, author, photo_author, created_time, updated_time, category, id_category } = data;
+    let { title, ingredients, photo, uuid_author, author, photo_author, created_time, updated_time, category, id_category } = data;
     ingredients = data.ingredients.split(',');
-    let result = { title, ingredients, photo, author, photo_author, created_time, updated_time, category, id_category };
+    let result = { title, ingredients, photo, uuid_author, author, photo_author, created_time, updated_time, category, id_category };
 
     res.status(200).json({
       code: 200,
@@ -335,6 +335,32 @@ const recipesController = {
       message: 'Success get data!',
       data: data,
       pagination: paging.response,
+    });
+  },
+
+  getCountRecipesByUuid: async (req, res) => {
+    let uuid = req.params.id;
+
+    let data = await countRecipes(uuid);
+    let count = data.rows[0];
+
+    if (!data) {
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
+        data: [],
+      });
+    }
+
+    // change items ingredients with split
+    // let { title, ingredients, photo, uuid_author, author, photo_author, created_time, updated_time, category, id_category } = data;
+    // ingredients = data.ingredients.split(',');
+    // let result = { title, ingredients, photo, uuid_author, author, photo_author, created_time, updated_time, category, id_category };
+
+    res.status(200).json({
+      code: 200,
+      message: 'Success get data!',
+      data: count,
     });
   },
 };

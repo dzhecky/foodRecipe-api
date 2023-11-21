@@ -31,7 +31,7 @@ const selectAllRecipes = async (paging, search, searchBy = 'title', sort = 'upda
 const selectRecipeById = async (id_recipe) => {
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.uuid, users.name AS author, users.photo AS photo_author, category.name AS category, recipes.id_category FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category WHERE recipes.id_recipe=${id_recipe}`,
+      `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.uuid AS uuid_author, users.name AS author, users.photo AS photo_author, category.name AS category, recipes.id_category FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category WHERE recipes.id_recipe=${id_recipe}`,
       (err, result) => {
         if (!err) {
           return resolve(result);
@@ -147,6 +147,18 @@ const countMyRecipe = async (uuid, search) => {
   });
 };
 
+const countRecipes = async (uuid) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT COUNT(*) FROM recipes WHERE uuid='${uuid}'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
 module.exports = {
   selectAllRecipes,
   selectRecipeById,
@@ -157,4 +169,5 @@ module.exports = {
   getRecipeByIdUser,
   countMyRecipe,
   getIdOwnerRecipe,
+  countRecipes,
 };

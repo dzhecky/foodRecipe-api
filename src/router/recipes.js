@@ -1,5 +1,5 @@
 const express = require('express');
-const { allRecipes, getRecipeById, showRecipeByIdUser, postRecipe, putRecipe, deleteRecipeId, myRecipes } = require('../controllers/recipes');
+const { allRecipes, getRecipeById, showRecipeByIdUser, postRecipe, putRecipe, deleteRecipeId, myRecipes, getCountRecipesByUuid } = require('../controllers/recipes');
 const verifyToken = require('../middleware/auth');
 const { isActivated } = require('../middleware/isActivated');
 const { recipeOwner, usersAndAdmin, onlyAdmin } = require('../middleware/roleUsers');
@@ -14,6 +14,7 @@ router.get('/:id', verifyToken, isActivated, showRecipeByIdUser);
 // Only users and admin
 router.post('/', verifyToken, isActivated, usersAndAdmin, upload.single('photo'), postRecipe);
 router.get('/show/myrecipes', verifyToken, isActivated, usersAndAdmin, myRecipes);
+router.get('/count/:id', verifyToken, isActivated, usersAndAdmin, getCountRecipesByUuid);
 
 // Only recipe owner
 router.put('/:id', verifyToken, isActivated, recipeOwner, upload.single('photo'), putRecipe);
