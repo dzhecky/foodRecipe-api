@@ -67,9 +67,9 @@ const recipesController = {
     }
 
     // change items ingredients with split
-    let { title, ingredients, photo, author, created_time, updated_time, category } = data;
+    let { title, ingredients, photo, author, created_time, updated_time, category, id_category } = data;
     ingredients = data.ingredients.split(',');
-    let result = { title, ingredients, photo, author, created_time, updated_time, category };
+    let result = { title, ingredients, photo, author, created_time, updated_time, category, id_category };
 
     res.status(200).json({
       code: 200,

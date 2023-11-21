@@ -31,7 +31,7 @@ const selectAllRecipes = async (paging, search, searchBy = 'title', sort = 'upda
 const selectRecipeById = async (id_recipe) => {
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.uuid, users.name AS author, category.name AS category, category.id_category FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category WHERE recipes.id_recipe=${id_recipe}`,
+      `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.uuid, users.name AS author, category.name AS category, recipes.id_category FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category WHERE recipes.id_recipe=${id_recipe}`,
       (err, result) => {
         if (!err) {
           return resolve(result);
@@ -95,7 +95,7 @@ const deleteRecipeById = async (id_recipe) => {
 
 const getRecipeByIdUser = (uuid, paging, search, sort = 'updated_time') => {
   return new Promise((resolve, reject) => {
-    let query = `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.name AS author, category.name AS category FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category WHERE users.uuid='${uuid}' AND LOWER(title) LIKE'%${search}%'`;
+    let query = `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.name AS author, category.name AS category, category.id_category FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category WHERE users.uuid='${uuid}' AND LOWER(title) LIKE'%${search}%'`;
 
     if (sort.trim() === 'title') {
       query += ` ORDER BY title`;
