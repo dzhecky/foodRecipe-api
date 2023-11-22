@@ -1,6 +1,6 @@
 const cloudinary = require('../config/photo');
 const { getAllCategory } = require('../models/category');
-const { selectAllRecipes, selectRecipeById, inputRecipe, updateRecipe, deleteRecipeById, countAll, getRecipeByIdUser, countMyRecipe, countRecipes } = require('../models/recipes');
+const { selectAllRecipes, selectRecipeById, inputRecipe, updateRecipe, deleteRecipeById, countAll, getRecipeByIdUser, countMyRecipe, countRecipes, selectNewRecipes } = require('../models/recipes');
 const createPagination = require('../utils/createPagination');
 
 const recipesController = {
@@ -353,15 +353,29 @@ const recipesController = {
       });
     }
 
-    // change items ingredients with split
-    // let { title, ingredients, photo, uuid_author, author, photo_author, created_time, updated_time, category, id_category } = data;
-    // ingredients = data.ingredients.split(',');
-    // let result = { title, ingredients, photo, uuid_author, author, photo_author, created_time, updated_time, category, id_category };
-
     res.status(200).json({
       code: 200,
       message: 'Success get data!',
       data: count,
+    });
+  },
+
+  showNewRecipe: async (req, res) => {
+    let data = await selectNewRecipes();
+    let result = data.rows;
+
+    if (!data) {
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
+        data: [],
+      });
+    }
+
+    res.status(200).json({
+      code: 200,
+      message: 'Success get data!',
+      data: result,
     });
   },
 };
