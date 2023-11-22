@@ -174,6 +174,21 @@ const selectNewRecipes = async () => {
   });
 };
 
+const selectSuggestionRecipes = async () => {
+  return new Promise((resolve, reject) => {
+    Pool.query(
+      `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.uuid, users.name AS author, users.photo AS photo_author, category.name AS category, category.id_category, event.status, COUNT(recipes.id_recipe) FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category JOIN event ON recipes.id_recipe=event.recipes_id GROUP BY recipes.id_recipe, users.uuid, users.name, users.photo, category.name, category.id_category, event.status ORDER BY count DESC LIMIT 1`,
+      (err, result) => {
+        if (!err) {
+          return resolve(result);
+        } else {
+          return reject(err);
+        }
+      }
+    );
+  });
+};
+
 module.exports = {
   selectAllRecipes,
   selectRecipeById,
@@ -186,4 +201,5 @@ module.exports = {
   getIdOwnerRecipe,
   countRecipes,
   selectNewRecipes,
+  selectSuggestionRecipes,
 };
