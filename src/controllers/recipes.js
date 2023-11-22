@@ -9,6 +9,7 @@ const recipesController = {
     let page = parseInt(req.query.page) || 0;
     let limit = parseInt(req.query.limit) || 10;
     let search = req.query.search || '';
+    let keyword = search.toLowerCase();
     let searchBy = req.query.search_by;
     let sort = req.query.sort;
 
@@ -24,10 +25,10 @@ const recipesController = {
       return res.status(404).json({ messsage: 'Sort invalid' });
     }
 
-    let count = await countAll(search, searchBy);
+    let count = await countAll(keyword, searchBy);
     let paging = createPagination(count.rows[0].count, page, limit);
 
-    let recipes = await selectAllRecipes(paging, search, searchBy, sort);
+    let recipes = await selectAllRecipes(paging, keyword, searchBy, sort);
     let data = recipes.rows;
 
     if (data.length == 0) {

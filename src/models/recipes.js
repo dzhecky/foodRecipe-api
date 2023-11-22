@@ -1,13 +1,13 @@
 const Pool = require('../config/db');
 
-const selectAllRecipes = async (paging, search, searchBy = 'title', sort = 'updated_time') => {
+const selectAllRecipes = async (paging, keyword, searchBy = 'title', sort = 'updated_time') => {
   return new Promise((resolve, reject) => {
     let query = `SELECT recipes.id_recipe, recipes.title, recipes.ingredients, recipes.photo, recipes.created_time, recipes.updated_time, users.uuid, users.name AS author, users.photo AS photo_author, category.name AS category, category.id_category FROM recipes JOIN users ON recipes.id_user=users.id_user JOIN category ON recipes.id_category=category.id_category WHERE`;
 
     if (searchBy.trim() === 'ingredients') {
-      query += ` LOWER(ingredients) LIKE'%${search}%'`;
+      query += ` LOWER(ingredients) LIKE'%${keyword}%'`;
     } else {
-      query += ` LOWER(${searchBy}) LIKE'%${search}%'`;
+      query += ` LOWER(${searchBy}) LIKE'%${keyword}%'`;
     }
 
     if (sort.trim() === 'title') {
@@ -115,14 +115,14 @@ const getRecipeByIdUser = (uuid, paging, search, sort = 'updated_time') => {
   });
 };
 
-const countAll = async (search, searchBy = 'title') => {
+const countAll = async (keyword, searchBy = 'title') => {
   return new Promise((resolve, reject) => {
     let query = `SELECT COUNT(*) FROM recipes WHERE`;
 
     if (searchBy.trim() === 'ingredients') {
-      query += ` LOWER(ingredients) LIKE'%${search}%'`;
+      query += ` LOWER(ingredients) LIKE'%${keyword}%'`;
     } else {
-      query += ` LOWER(${searchBy}) LIKE'%${search}%'`;
+      query += ` LOWER(${searchBy}) LIKE'%${keyword}%'`;
     }
 
     Pool.query(query, (err, result) => {
