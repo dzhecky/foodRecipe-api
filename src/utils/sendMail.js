@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const base_url = process.env.BASE_URL;
+const url_api = process.env.URL_API;
 
 const transporter = nodemailer.createTransport({
   service: process.env.MAIL_SERVICE,
@@ -82,11 +83,11 @@ const createEmail = (email, token) => {
                     <br>
                     Immediately activate your account by clicking the button below.
                 </p>
-                <a href="${base_url}/auth/activate/${token}" style="color: white;" class="auth-button">Activate Account</a>
+                <a href="${url_api}/auth/activate/${token}" style="color: white;" class="auth-button">Activate Account</a>
                 <p>
                     If you don't feel like registering an account in the Food Recipes App, ignore this email.
                     <br>
-                    Alternative link: <a href="${base_url}/auth/activate/${token}">${base_url}/auth/activate/${token}</a>
+                    Alternative link: <a href="${url_api}/auth/activate/${token}">${url_api}/auth/activate/${token}</a>
                 </p>
                 <hr>
                 <p>Copyright &copy; ${new Date().getFullYear()} Food Recipes App - Developed with <span style="color: red !important;">🔥</span> by <a style="text-decoration: none;" href="https://github.com/rikimuhammadasli021299" target="_blank">Riki Muhammad Nurhidayat</a> in Tasik Rock City</p>
