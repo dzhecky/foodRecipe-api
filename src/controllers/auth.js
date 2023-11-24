@@ -107,8 +107,8 @@ const authController = {
 
     // Check email is activated?
     if (checkEmail.rows[0].is_active === false) {
-      return res.status(200).json({
-        code: 200,
+      return res.status(400).json({
+        code: 400,
         message: 'Email not active, please check your email to activated',
       });
     }
