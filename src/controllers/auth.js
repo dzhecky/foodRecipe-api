@@ -72,7 +72,7 @@ const authController = {
 
     res.status(200).json({
       code: 200,
-      message: `User activated successfully, ${(<a href='https://food-recipes-app-fe.vercel.app/#/login'>login to your account</a>)}`,
+      message: 'User activated successfully, link to login: https://food-recipes-app-fe.vercel.app/#/login',
     });
   },
 
