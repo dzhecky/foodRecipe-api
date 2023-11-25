@@ -64,7 +64,7 @@ const deleteLikeById = async (id) => {
 const selectMyBookmark = async (users_id, paging) => {
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT event.id, recipes.id_recipe, recipes.photo, recipes.title, recipes.ingredients, users.name AS author, category.name AS category, event.status FROM event JOIN recipes ON event.recipes_id = recipes.id_recipe JOIN users ON recipes.uuid = users.uuid JOIN category ON recipes.id_category = category.id_category WHERE event.users_id='${users_id}' AND event.status='bookmark' ORDER BY created_at DESC LIMIT ${paging.limit} OFFSET ${paging.offset}`,
+      `SELECT event.id, recipes.id_recipe, recipes.photo, recipes.title, recipes.ingredients, users.name AS author, category.name AS category, event.status, (SELECT COUNT(*) AS like FROM event WHERE recipes_id=recipes.id_recipe AND status='like'), (SELECT COUNT(*) AS bookmark FROM event WHERE recipes_id=recipes.id_recipe AND status='bookmark'), (SELECT COUNT(*) AS comments FROM comments WHERE id_recipe=recipes.id_recipe) FROM event JOIN recipes ON event.recipes_id = recipes.id_recipe JOIN users ON recipes.uuid = users.uuid JOIN category ON recipes.id_category = category.id_category WHERE event.users_id='${users_id}' AND event.status='bookmark' ORDER BY created_at DESC LIMIT ${paging.limit} OFFSET ${paging.offset}`,
       (err, result) => {
         if (!err) {
           return resolve(result);
@@ -79,7 +79,7 @@ const selectMyBookmark = async (users_id, paging) => {
 const selectMyLike = async (users_id, paging) => {
   return new Promise((resolve, reject) => {
     Pool.query(
-      `SELECT event.id, recipes.id_recipe, recipes.photo, recipes.title, recipes.ingredients, users.name AS author, category.name AS category, event.status FROM event JOIN recipes ON event.recipes_id = recipes.id_recipe JOIN users ON recipes.uuid = users.uuid JOIN category ON recipes.id_category = category.id_category WHERE event.users_id='${users_id}' AND event.status='like' ORDER BY created_at DESC LIMIT ${paging.limit} OFFSET ${paging.offset}`,
+      `SELECT event.id, recipes.id_recipe, recipes.photo, recipes.title, recipes.ingredients, users.name AS author, category.name AS category, event.status, (SELECT COUNT(*) AS like FROM event WHERE recipes_id=recipes.id_recipe AND status='like'), (SELECT COUNT(*) AS bookmark FROM event WHERE recipes_id=recipes.id_recipe AND status='bookmark'), (SELECT COUNT(*) AS comments FROM comments WHERE id_recipe=recipes.id_recipe) FROM event JOIN recipes ON event.recipes_id = recipes.id_recipe JOIN users ON recipes.uuid = users.uuid JOIN category ON recipes.id_category = category.id_category WHERE event.users_id='${users_id}' AND event.status='like' ORDER BY created_at DESC LIMIT ${paging.limit} OFFSET ${paging.offset}`,
       (err, result) => {
         if (!err) {
           return resolve(result);
