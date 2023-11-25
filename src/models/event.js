@@ -175,6 +175,21 @@ const selectCountBookmarkedByIdRecipe = async (id_recipe) => {
   });
 };
 
+const selectCountCommentsAndEventsByIdRecipe = async (id_recipe) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(
+      `SELECT COUNT(*) AS comments, (SELECT COUNT(*) AS like FROM event WHERE recipes_id=${id_recipe} AND status='like'), (SELECT COUNT(*) AS bookmark FROM event WHERE recipes_id=${id_recipe} AND status='bookmark') FROM comments  WHERE id_recipe=${id_recipe}`,
+      (err, result) => {
+        if (!err) {
+          return resolve(result);
+        } else {
+          return reject(err);
+        }
+      }
+    );
+  });
+};
+
 module.exports = {
   insertEvent,
   selectAllEvent,
@@ -190,4 +205,5 @@ module.exports = {
   getIdOwnerEvent,
   selectCountLikedByIdRecipe,
   selectCountBookmarkedByIdRecipe,
+  selectCountCommentsAndEventsByIdRecipe,
 };

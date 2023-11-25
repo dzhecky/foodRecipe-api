@@ -12,6 +12,7 @@ const {
   checkIsLike,
   selectCountLikedByIdRecipe,
   selectCountBookmarkedByIdRecipe,
+  selectCountCommentsAndEventsByIdRecipe,
 } = require('../models/event');
 const { selectRecipeById } = require('../models/recipes');
 const createPagination = require('../utils/createPagination');
@@ -241,6 +242,37 @@ const eventController = {
     }
 
     let result = await selectCountLikedByIdRecipe(id_recipe);
+
+    if (!result) {
+      return res.status(404).json({
+        code: 404,
+        message: 'Failed get data!',
+      });
+    }
+
+    res.status(200).json({
+      code: 200,
+      message: 'Success get data!',
+      data: result.rows,
+    });
+  },
+
+  getCountCommentsAndEventsByIdRecipe: async (req, res) => {
+    let id_recipe = req.params.id;
+
+    // check recipes
+    let recipe = await selectRecipeById(id_recipe);
+    let recipe_data = recipe.rows[0];
+
+    if (!recipe_data) {
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
+        data: [],
+      });
+    }
+
+    let result = await selectCountCommentsAndEventsByIdRecipe(id_recipe);
 
     if (!result) {
       return res.status(404).json({
