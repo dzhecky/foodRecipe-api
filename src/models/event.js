@@ -151,4 +151,43 @@ const getIdOwnerEvent = async (id) => {
   });
 };
 
-module.exports = { insertEvent, selectAllEvent, selectEventById, deleteBookmarkById, selectMyBookmark, selectMyLike, countMyBookmark, countMyLike, deleteLikeById, checkIsBookmark, checkIsLike, getIdOwnerEvent };
+const selectCountLikedByIdRecipe = async (id_recipe) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT COUNT(*) FROM event WHERE recipes_id=${id_recipe} AND status='like'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
+const selectCountBookmarkedByIdRecipe = async (id_recipe) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT COUNT(*) FROM event WHERE recipes_id=${id_recipe} AND status='bookmark'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
+module.exports = {
+  insertEvent,
+  selectAllEvent,
+  selectEventById,
+  deleteBookmarkById,
+  selectMyBookmark,
+  selectMyLike,
+  countMyBookmark,
+  countMyLike,
+  deleteLikeById,
+  checkIsBookmark,
+  checkIsLike,
+  getIdOwnerEvent,
+  selectCountLikedByIdRecipe,
+  selectCountBookmarkedByIdRecipe,
+};

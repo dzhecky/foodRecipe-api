@@ -1,4 +1,18 @@
-const { insertEvent, selectAllEvent, deleteBookmarkById, deleteLikeById, selectEventById, selectMyBookmark, selectMyLike, countMyBookmark, countMyLike, checkIsBookmark, checkIsLike } = require('../models/event');
+const {
+  insertEvent,
+  selectAllEvent,
+  deleteBookmarkById,
+  deleteLikeById,
+  selectEventById,
+  selectMyBookmark,
+  selectMyLike,
+  countMyBookmark,
+  countMyLike,
+  checkIsBookmark,
+  checkIsLike,
+  selectCountLikedByIdRecipe,
+  selectCountBookmarkedByIdRecipe,
+} = require('../models/event');
 const { selectRecipeById } = require('../models/recipes');
 const createPagination = require('../utils/createPagination');
 
@@ -208,6 +222,68 @@ const eventController = {
       message: 'Success get data!',
       data: result,
       pagination: paging.response,
+    });
+  },
+
+  getCountLikedByIdRecipe: async (req, res) => {
+    let id_recipe = req.params.id;
+
+    // check recipes
+    let recipe = await selectRecipeById(id_recipe);
+    let recipe_data = recipe.rows[0];
+
+    if (!recipe_data) {
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
+        data: [],
+      });
+    }
+
+    let result = await selectCountLikedByIdRecipe(id_recipe);
+
+    if (!result) {
+      return res.status(404).json({
+        code: 404,
+        message: 'Failed get data!',
+      });
+    }
+
+    res.status(200).json({
+      code: 200,
+      message: 'Success get data!',
+      data: result.rows,
+    });
+  },
+
+  getCountBookmarkedByIdRecipe: async (req, res) => {
+    let id_recipe = req.params.id;
+
+    // check recipes
+    let recipe = await selectRecipeById(id_recipe);
+    let recipe_data = recipe.rows[0];
+
+    if (!recipe_data) {
+      return res.status(200).json({
+        code: 200,
+        message: 'Data not found!',
+        data: [],
+      });
+    }
+
+    let result = await selectCountBookmarkedByIdRecipe(id_recipe);
+
+    if (!result) {
+      return res.status(404).json({
+        code: 404,
+        message: 'Failed get data!',
+      });
+    }
+
+    res.status(200).json({
+      code: 200,
+      message: 'Success get data!',
+      data: result.rows,
     });
   },
 };

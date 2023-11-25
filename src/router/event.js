@@ -1,7 +1,7 @@
 const express = require('express');
 const verifyToken = require('../middleware/auth');
 const { isActivated } = require('../middleware/isActivated');
-const { postEvent, getEvent, deleteEventBookmark, deleteEventLike, getMyBookmark, getMyLike } = require('../controllers/event');
+const { postEvent, getEvent, deleteEventBookmark, deleteEventLike, getMyBookmark, getMyLike, getCountLikedByIdRecipe, getCountBookmarkedByIdRecipe } = require('../controllers/event');
 const { eventOwner } = require('../middleware/roleUsers');
 const router = express.Router();
 
@@ -11,5 +11,7 @@ router.delete('/bookmark/:id', verifyToken, isActivated, eventOwner, deleteEvent
 router.delete('/like/:id', verifyToken, isActivated, eventOwner, deleteEventLike);
 router.get('/bookmarked/', verifyToken, isActivated, getMyBookmark);
 router.get('/liked/', verifyToken, isActivated, getMyLike);
+router.get('/count-liked/:id', verifyToken, isActivated, getCountLikedByIdRecipe);
+router.get('/count-bookmarked/:id', verifyToken, isActivated, getCountBookmarkedByIdRecipe);
 
 module.exports = router;
