@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
-const { createUser, checkEmailRegistered, checkUserIsActive, activateUser, updateOtpByUserEmail, resetOtpByUserEmail } = require('../models/auth');
-const { getUserByEmail } = require('../models/users');
+const { createUser, checkEmailRegistered, checkUserIsActive, activateUser, updateOtpByUserEmail, resetOtpByUserEmail, updatePasswordByOtp } = require('../models/auth');
+const { getUserByEmail, getUserByOtp } = require('../models/users');
 const { sendMail } = require('../utils/sendMail');
 const { sendOtpToMail } = require('../utils/sendOtpToEmail');
 
@@ -205,7 +205,7 @@ const authController = {
 
     res.status(200).json({
       code: 200,
-      message: 'Otp has been send to your emmail, please check your email',
+      message: 'Otp has been send to your email, please check your email',
     });
   },
 
@@ -239,6 +239,41 @@ const authController = {
     res.status(200).json({
       code: 200,
       message: 'Otp has been reset!',
+    });
+  },
+
+  resetPassword: async (req, res) => {
+    let { otp, password } = req.body;
+
+    if (!otp || !password) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Otp and password is required',
+      });
+    }
+
+    let checkUserByOTP = await getUserByOtp(otp);
+    if (checkUserByOTP.rows.length === 0) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Code OTP Wrong!',
+      });
+    }
+
+    let passwordHashed = await bcrypt.hash(password, 10);
+
+    let updatePassword = await updatePasswordByOtp(otp, passwordHashed);
+
+    if (!updatePassword) {
+      return res.status(404).json({
+        code: 404,
+        message: 'Failed reset password!',
+      });
+    }
+
+    res.status(200).json({
+      code: 200,
+      message: 'Password has been reset, please login with new password!',
     });
   },
 };

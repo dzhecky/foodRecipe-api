@@ -92,6 +92,18 @@ const getUserByEmail = async (email) => {
   });
 };
 
+const getUserByOtp = async (otp) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`SELECT * FROM users WHERE otp=${otp}`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
 module.exports = {
   showAllUsers,
   countAll,
@@ -100,4 +112,5 @@ module.exports = {
   updateUserById,
   getUserByEmail,
   selectMyAccount,
+  getUserByOtp,
 };
