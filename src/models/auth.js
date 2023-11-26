@@ -61,4 +61,16 @@ const updateOtpByUserEmail = async (email, otp) => {
   });
 };
 
-module.exports = { createUser, checkEmailRegistered, checkUserIsActive, activateUser, updateOtpByUserEmail };
+const resetOtpByUserEmail = async (email) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`UPDATE users SET otp=${null} WHERE email='${email}'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
+module.exports = { createUser, checkEmailRegistered, checkUserIsActive, activateUser, updateOtpByUserEmail, resetOtpByUserEmail };
