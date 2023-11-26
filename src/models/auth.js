@@ -49,4 +49,16 @@ const activateUser = async (uuid) => {
   });
 };
 
-module.exports = { createUser, checkEmailRegistered, checkUserIsActive, activateUser };
+const updateOtpByUserEmail = async (email, otp) => {
+  return new Promise((resolve, reject) => {
+    Pool.query(`UPDATE users SET otp=${otp} WHERE email='${email}'`, (err, result) => {
+      if (!err) {
+        return resolve(result);
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
+module.exports = { createUser, checkEmailRegistered, checkUserIsActive, activateUser, updateOtpByUserEmail };

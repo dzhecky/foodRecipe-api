@@ -1,9 +1,10 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
-const { createUser, checkEmailRegistered, checkUserIsActive, activateUser } = require('../models/auth');
+const { createUser, checkEmailRegistered, checkUserIsActive, activateUser, updateOtpByUserEmail } = require('../models/auth');
 const { getUserByEmail } = require('../models/users');
 const { sendMail } = require('../utils/sendMail');
+const { sendOtpToMail } = require('../utils/sendOtpToEmail');
 
 const authController = {
   register: async (req, res) => {
@@ -158,6 +159,54 @@ const authController = {
         message: error.message,
       });
     }
+  },
+
+  forgotPassword: async (req, res) => {
+    let { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Please insert your email!',
+      });
+    }
+
+    let checkEmail = await getUserByEmail(email);
+    if (checkEmail.rows.length === 0) {
+      return res.status(400).json({
+        code: 400,
+        message: 'Email not registered!',
+      });
+    }
+
+    console.log(checkEmail.rows[0]);
+
+    let otp = Math.floor(Math.random() * 90000) + 10000;
+    let createOTP = await updateOtpByUserEmail(email, otp);
+
+    if (!createOTP) {
+      return res.status(404).json({
+        code: 404,
+        message: 'Failed get otp!',
+      });
+    }
+
+    const token = jwt.sign(email, process.env.JWT_SECRET);
+    let sendEmailToUser = await sendOtpToMail(email, token, checkEmail.rows[0].name, otp);
+
+    if (!sendEmailToUser) {
+      await createUser.rollback();
+      return res.status(500).json({
+        code: 500,
+        error: 'Send email failed!',
+        message: 'Send otp failed!',
+      });
+    }
+
+    res.status(200).json({
+      code: 200,
+      message: 'Otp has been send to your emmail, please check your email',
+    });
   },
 };
 
