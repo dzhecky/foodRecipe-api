@@ -80,7 +80,7 @@ const createEmail = (email, token, name, otp) => {
             <br />
             Please input the code below to reset your password.
         </p>
-        <a href="#" style="color: white; letter-spacing: 11px; text-align: center" class="auth-button">${otp}</a>
+        <a href="#" style="color: white; letter-spacing: 7px; text-align: center" class="auth-button">${otp}</a>
         <p>
             If you don't feel like to reset password an account in the Food Recipes App, ignore this email.
             <br />
