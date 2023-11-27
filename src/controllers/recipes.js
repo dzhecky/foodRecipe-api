@@ -12,6 +12,9 @@ const recipesController = {
     let keyword = search.toLowerCase();
     let searchBy = req.query.search_by;
     let sort = req.query.sort;
+    let id_category = req.query.category;
+    let popular = req.query.popular;
+    console.log(popular);
 
     // check serach by
     let listSearch = ['title', 'ingredients', undefined];
@@ -25,10 +28,10 @@ const recipesController = {
       return res.status(404).json({ messsage: 'Sort invalid' });
     }
 
-    let count = await countAll(keyword, searchBy);
+    let count = await countAll(keyword, searchBy, id_category);
     let paging = createPagination(count.rows[0].count, page, limit);
 
-    let recipes = await selectAllRecipes(paging, keyword, searchBy, sort);
+    let recipes = await selectAllRecipes(paging, keyword, searchBy, sort, id_category, popular);
     let data = recipes.rows;
 
     if (data.length == 0) {
