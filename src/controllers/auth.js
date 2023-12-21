@@ -62,7 +62,7 @@ const authController = {
     let id_user = req.params.id;
     let checkUser = await checkUserIsActive(id_user);
 
-    if (!checkUser) {
+    if (checkUser.rows.length === 0) {
       return res.status(200).json({
         code: 200,
         message: 'User not found or user has been activated!',
@@ -74,7 +74,6 @@ const authController = {
     res.status(200).json({
       code: 200,
       message: 'User activated successfully',
-      url: 'link to login: https://food-recipes-app-fe.vercel.app/#/login',
     });
   },
 
