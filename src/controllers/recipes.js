@@ -185,19 +185,19 @@ const recipesController = {
       },
       data: {
         app_id: '9fed0bad-fea6-4dc9-b4d5-d23857a12b7b',
-        name: 'Food Recipes Mobile',
+        name: `There's a new recipe`,
         included_segments: ['All'],
-        contents: { en: 'English', es: `${req.user.name} uploaded a new recipe, check it out 😊!` },
+        contents: { en: `${req.user.name} uploaded a new recipe, check it out 😊!`, id: `${req.user.name} Membuat resep baru, segera cek 😊!` },
       },
     };
 
     axios
       .request(options)
       .then(function (response) {
-        console.log('sucess coyyyyy', response.data);
+        console.log(response.data);
       })
       .catch(function (error) {
-        console.error('errorrrr coyyyyy', error);
+        console.error(error);
       });
 
     res.status(200).json({
