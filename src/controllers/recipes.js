@@ -2,7 +2,7 @@ const cloudinary = require('../config/photo');
 const { getAllCategory } = require('../models/category');
 const { selectAllRecipes, selectRecipeById, inputRecipe, updateRecipe, deleteRecipeById, countAll, getRecipeByIdUser, countMyRecipe, countRecipes, selectNewRecipes, selectSuggestionRecipes } = require('../models/recipes');
 const createPagination = require('../utils/createPagination');
-const sdk = require('api')('@onesignal/v11.0#4o6bm1clqfkyezb');
+const axios = require('axios');
 
 const recipesController = {
   allRecipes: async (req, res) => {
@@ -175,21 +175,30 @@ const recipesController = {
     }
 
     //push notif
-    sdk
-      .createNotification(
-        {
-          included_segments: ['Subscribed Users'],
-          contents: {
-            en: 'English or Any Language Message',
-            es: 'Spanish Message',
-          },
-        },
-        {
-          authorization: 'Basic NDBkYjM4MWYtYjQzMC00ZjMwLWI2Y2YtYTUxZjdkMGM4ZDIz',
-        }
-      )
-      .then(({ data }) => console.log('ini success notif', data))
-      .catch((err) => console.error('ini error notif', err));
+    const options = {
+      method: 'POST',
+      url: 'https://onesignal.com/api/v1/notifications',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Basic NDBkYjM4MWYtYjQzMC00ZjMwLWI2Y2YtYTUxZjdkMGM4ZDIz',
+        'content-type': 'application/json',
+      },
+      data: {
+        app_id: '9fed0bad-fea6-4dc9-b4d5-d23857a12b7b',
+        name: 'Food Recipes Mobile',
+        included_segments: ['All'],
+        contents: { en: 'English', es: `${req.user.name} uploaded a new recipe, check it out 😊!` },
+      },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log('sucess coyyyyy', response.data);
+      })
+      .catch(function (error) {
+        console.error('errorrrr coyyyyy', error);
+      });
 
     res.status(200).json({
       code: 200,
