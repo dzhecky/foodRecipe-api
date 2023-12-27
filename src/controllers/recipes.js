@@ -186,7 +186,11 @@ const recipesController = {
       data: {
         app_id: '9fed0bad-fea6-4dc9-b4d5-d23857a12b7b',
         name: `There's a new recipe`,
-        included_segments: ['All'],
+        filters: [{ field: 'tag', key: 'userID', relation: '!=', value: uuid }],
+        headings: {
+          en: `There's a new recipe!`,
+          id: 'Ada resep baru!',
+        },
         contents: { en: `${req.user.name} uploaded a new recipe, check it out 😊!`, id: `${req.user.name} Membuat resep baru, segera cek 😊!` },
       },
     };
